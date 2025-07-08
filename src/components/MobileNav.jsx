@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MobileNav({ isNavToggle, setIsNavToggle }) {
   const navRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -18,6 +20,8 @@ export default function MobileNav({ isNavToggle, setIsNavToggle }) {
     };
   }, [setIsNavToggle]);
 
+
+
   return (
     <div
       ref={navRef}
@@ -25,8 +29,8 @@ export default function MobileNav({ isNavToggle, setIsNavToggle }) {
         isNavToggle ? "-translate-y-0" : "-translate-y-[300px]"
       }`}
     >
-      <button className="py-[15px] px-[20px] text-left w-full">Login</button>
-      <button className="py-4 px-8 rounded-full bg-[#4361ee] text-white w-full">
+      <button onClick={() => navigate('/login')} className="py-[15px] px-[20px] text-left w-full">Login</button>
+      <button onClick={() => navigate('/register')} className="py-4 px-8 rounded-full bg-[#4361ee] text-white w-full">
         Sign Up
       </button>
     </div>

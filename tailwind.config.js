@@ -7,10 +7,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'primary': ['Work sans', 'sans-serif']
+        'primary': ['Work sans', 'sans-serif'],
+        'secondary': ["Inter", 'sans-serif']
       },
       colors: {
-        'primary': '#172c56'
+        'primary': '#172c56',
+        'secondary': '#4361ee'
       }
     },
   },

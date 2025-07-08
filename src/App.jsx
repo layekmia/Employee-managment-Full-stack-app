@@ -1,9 +1,15 @@
-import { Button } from "flowbite-react";
+import NavBar from "./components/NavBar";
+import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
     <>
-    <div className="text-red-500">App</div>
+      <NavBar />
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
+      <Footer />
     </>
   );
 }

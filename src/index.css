@@ -1,3 +1,12 @@
-@import "tailwindcss";
-@plugin "flowbite-react/plugin/tailwindcss";
-@source "../.flowbite-react/class-list.json";
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.hero{
+    background-image: url('https://cdn.prod.website-files.com/65efe5c22fe5c01bbd337a5f/6682868c9f2ba04258d1a685_5ff868d15dc04fcdb0d8c00e_Pat-2.svg');
+}
+.max-w{
+    max-width: 1220px;
+}

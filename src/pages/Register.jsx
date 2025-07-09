@@ -8,6 +8,7 @@ import useAuth from "../hook/useAuth";
 import { updateProfile } from "firebase/auth";
 import auth from "../config/firebase";
 import { getIdToken } from "firebase/auth";
+import PasswordShowToggle from "../components/PasswordShowToggle";
 
 export default function Register() {
   const {
@@ -21,6 +22,7 @@ export default function Register() {
   const [preview, setPreview] = useState(null);
   const [isImageUpload, setisImageUpload] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const { createUser } = useAuth();
 
@@ -53,16 +55,18 @@ export default function Register() {
         image: data.image,
       };
 
-      await axios.post("http://localhost:3000/web/api/user/register", userInfo);
+      await axios.post(
+        "http://localhost:3000/web/api/users/register",
+        userInfo
+      );
 
       // send an api request for jwt token
       const token = await getIdToken(user);
-      const res = await axios.post(
+      await axios.post(
         "http://localhost:3000/web/api/auth",
         {},
         { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
       );
-      console.log(res.data);
       toast.success("Register successfully");
     } catch (err) {
       switch (err.code) {
@@ -111,20 +115,20 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-8">
+    <div className="flex flex-col items-center justify-center p-5 md:p-8 min-h-screen">
       <div className="pb-5 mb-2">
         <img
           src={assets.logo}
           alt="logo"
           className="w-[45px] h-[25px] mx-auto"
         />
-        <h2 className="text-[#212529] text-3xl font-secondary mt-2 font-semibold">
+        <h2 className="text-[#212529] text-[25px] text-center sm:text-3xl font-secondary mt-2 font-semibold">
           Join WorkSync as an Employee or HR
         </h2>
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md mx-auto  bg-white p-8 rounded-lg shadow space-y-4"
+        className="w-full max-w-md mx-auto bg-white p-5 sm:p-8 rounded-lg shadow space-y-4"
       >
         <label className="cursor-pointer">
           <img
@@ -153,26 +157,34 @@ export default function Register() {
           <p className="text-red-500 text-sm">Email is required</p>
         )}
 
-        <input
-          placeholder="Password"
-          type="password"
-          {...register("password", {
-            required: true,
-            minLength: 6,
-            validate: {
-              hasUpper: (v) => /[A-Z]/.test(v) || "Must contain uppercase",
-              hasSpecial: (v) =>
-                /[!@#$%^&*(),.?":{}|<>]/.test(v) ||
-                "Must contain special character",
-            },
-          })}
-          className="w-full border px-4 py-2 rounded focus:outline-none"
-        />
-        {errors.password && (
-          <p className="text-red-500 text-sm">
-            {errors.password.message || "Password invalid"}
-          </p>
-        )}
+        <div className="relative">
+          <input
+            placeholder="Password"
+            type={showPassword ? "text" : "password"}
+            {...register("password", {
+              required: true,
+              minLength: 6,
+              validate: {
+                hasUpper: (v) => /[A-Z]/.test(v) || "Must contain uppercase",
+                hasSpecial: (v) =>
+                  /[!@#$%^&*(),.?":{}|<>]/.test(v) ||
+                  "Must contain special character",
+              },
+            })}
+            className="w-full border px-4 py-2 rounded focus:outline-none"
+          />
+
+          {/* Toggle Button */}
+          <PasswordShowToggle
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+          {errors.password && (
+            <p className="text-red-500 text-sm">
+              {errors.password.message || "Password invalid"}
+            </p>
+          )}
+        </div>
 
         <input
           placeholder="Bank Account No"

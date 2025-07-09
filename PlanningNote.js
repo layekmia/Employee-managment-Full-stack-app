@@ -1,4 +1,27 @@
 // Data from user while Register;
+
+
+const admin = require("../config/firebaseAdmin");
+const User = require("../model/User");
+
+exports.fireUser = async (req, res) => {
+  try {
+    const { uid } = req.params;
+
+    // 1️⃣ Update MongoDB isFired field
+    await User.findOneAndUpdate({ uid }, { isFired: true });
+
+    // 2️⃣ Disable Firebase account
+    await admin.auth().updateUser(uid, { disabled: true });
+
+    res.json({ message: "User fired successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error firing user" });
+  }
+};
+
+
 {
   "uid": "user-unique-id",
   "name": "Full Name",

@@ -31,7 +31,6 @@ export default function AuthContextProvider({ children }) {
           accessToken: token,
         } = currentUser;
         setUser({ name, email, image, uid, token });
-        console.log(currentUser);
       } else {
         setUser(null);
       }

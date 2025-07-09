@@ -3,4 +3,16 @@ const generateRandomBankAccount = () => {
   return accountNumber;
 };
 
-export {generateRandomBankAccount}
+const dashboardRouteTitles = {
+  "/dashboard/overview": "Overview",
+  "/dashboard/work-sheet": "Work Sheet",
+  "/dashboard/payment-history": "Payment History",
+  "/dashboard/employee-list": "Employee List",
+  "/dashboard/progress": "Progress",
+  "/dashboard/all-employee": "All Employee",
+  "/dashboard/payroll": "Payroll",
+  "/dashboard/settings": "Settings",
+};
+
+
+export {generateRandomBankAccount, dashboardRouteTitles}

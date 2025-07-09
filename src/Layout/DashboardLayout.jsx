@@ -11,7 +11,7 @@ import Logo from "../components/Logo";
 import { dashboardRouteTitles } from "../utils/helper";
 import { useState } from "react";
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
-import { RxCross1 } from "react-icons/rx"; 
+import { RxCross1 } from "react-icons/rx";
 
 export default function DashboardLayout() {
   const location = useLocation();
@@ -27,11 +27,16 @@ export default function DashboardLayout() {
       >
         <div className="h-16 flex items-center border-b px-4 bg-[#fcfcfc] relative">
           <Logo />
-          <button className="absolute top-2 right-3 font-bold text-gray-600 md:hidden" onClick={() => setSidebarToggle(false)}><RxCross1 /></button>
+          <button
+            className="absolute top-2 right-3 font-bold text-gray-600 md:hidden"
+            onClick={() => setSidebarToggle(false)}
+          >
+            <RxCross1 />
+          </button>
         </div>
         <SidebarMenu userRole="hr" setSidebarToggle={setSidebarToggle} />
       </aside>
-      <div className="bg-gray-100 flex-1 md:ml-[250px] ">
+      <div className="bg-gray-50 flex-1 md:ml-[250px] ">
         <nav className=" flex items-center justify-between h-16 border-b px-5 bg-[#fcfcfc] max-md:w-full md:fixed top-0 md:left-[250px] right-0">
           <div className="flex items-center gap-2">
             <button
@@ -80,7 +85,7 @@ export default function DashboardLayout() {
             </Dropdown>
           </div>
         </nav>
-        <main className="min-h-screen p-5">
+        <main className="min-h-screen p-5 mt-16">
           <Outlet />
         </main>
       </div>

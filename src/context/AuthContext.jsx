@@ -5,12 +5,13 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import auth from "../config/firebase";
+import Spinner from "../components/Spinner";
 
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [isUserLoading, setIsUserLoading] = useState(true);
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
 
   const createUser = ({ email, password }) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -34,14 +35,16 @@ export default function AuthContextProvider({ children }) {
       } else {
         setUser(null);
       }
-      setIsUserLoading(false);
+      setIsAuthChecking(false);
     });
     return () => unsubscribe();
   }, []);
 
+  if(isAuthChecking) return <Spinner/>
+
   return (
     <AuthContext.Provider
-      value={{ createUser, signInUser, isUserLoading, user }}
+      value={{ createUser, signInUser, user }}
     >
       {children}
     </AuthContext.Provider>

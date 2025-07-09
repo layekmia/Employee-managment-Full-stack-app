@@ -57,12 +57,12 @@ export default function Register() {
 
       // send an api request for jwt token
       const token = await getIdToken(user);
-      await axios.post(
+      const res = await axios.post(
         "http://localhost:3000/web/api/auth",
         {},
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
       );
-
+      console.log(res.data);
       toast.success("Register successfully");
     } catch (err) {
       switch (err.code) {
@@ -83,14 +83,6 @@ export default function Register() {
     } finally {
       setLoading(false);
     }
-
-    // try {
-    //   const res = await axios.post("https://your-api-url/register", data);
-    //   console.log("Registration success:", res.data);
-    //   reset();
-    // } catch (error) {
-    //   console.error("Registration failed:", error);
-    // }
   };
 
   const handleImageChange = async (e) => {

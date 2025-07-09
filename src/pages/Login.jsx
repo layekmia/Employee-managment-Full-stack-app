@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import auth from "../config/firebase";
 import useAuth from "../hook/useAuth";
-import { assets } from "../assets/assets";
 import { toast } from "react-toastify";
 import PasswordShowToggle from "../components/PasswordShowToggle";
+import SocialLogin from "../components/SocialLogin";
 
 export default function Login() {
   const {
@@ -15,7 +14,6 @@ export default function Login() {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const { signInUser } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -57,68 +55,69 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-5 md:p-8 min-h-screen">
-      <div className="pb-5 mb-2">
-        <img
-          src={assets.logo}
-          alt="logo"
-          className="w-[45px] h-[25px] mx-auto"
-        />
-        <h2 className="text-[#212529] text-[25px] sm:text-3xl font-secondary mt-2 font-semibold">
+    <div className="flex flex-col items-center justify-center p-5 md:p-8">
+      <div className="pb-[35px]">
+        <h2 className="text-[#212529] font-secondary text-[25px] sm:text-3xl mt-2 font-semibold">
           Log into Your WorkSync
         </h2>
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md mx-auto bg-white p-5 sm:p-8 rounded-lg shadow space-y-4"
-      >
-        <h2 className="text-xl font-semibold text-center">Login here</h2>
+      <div className="max-w-md mx-auto p-5 sm:p-8 rounded border w-full">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full  bg-white  space-y-4"
+        >
+          <h2 className="text-xl font-semibold text-center">Login here</h2>
 
-        <input
-          placeholder="Email Address"
-          type="email"
-          {...register("email", { required: true })}
-          className="w-full border px-4 py-2 rounded focus:outline-none"
-        />
-        {errors.email && (
-          <p className="text-red-500 text-sm">Email is required</p>
-        )}
-
-        <div className="relative">
           <input
-            placeholder="Password"
-            type={`${showPassword ? "text" : "password"}`}
-            {...register("password", { required: true })}
+            placeholder="Email Address"
+            type="email"
+            {...register("email", { required: true })}
             className="w-full border px-4 py-2 rounded focus:outline-none"
           />
-          {errors.password && (
-            <p className="text-red-500 text-sm">Password is required</p>
+          {errors.email && (
+            <p className="text-red-500 text-sm">Email is required</p>
           )}
-          <PasswordShowToggle
-            showPassword={showPassword}
-            setShowPassword={setShowPassword}
-          />
-        </div>
 
-        <button
-          disabled={loading}
-          type="submit"
-          className="w-full bg-secondary text-white py-2 rounded hover:bg-opacity-80"
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
+          <div className="relative">
+            <input
+              placeholder="Password"
+              type={`${showPassword ? "text" : "password"}`}
+              {...register("password", { required: true })}
+              className="w-full border px-4 py-2 rounded focus:outline-none"
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm">Password is required</p>
+            )}
+            <PasswordShowToggle
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+            />
+          </div>
 
-        <div className="text-sm text-center space-y-2">
-          <Link to="/forgot-password" className="text-primary underline">
-            Forgot Password?
-          </Link>
-          <br />
-          <span>Don't have an account?</span>{" "}
-          <Link to="/register" className="text-primary underline">
-            Register
-          </Link>
+          <button
+            disabled={loading}
+            type="submit"
+            className="w-full font-semibold text-lg bg-[#035fcb] text-white py-2 rounded hover:bg-[#3769DA] transition-colors"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+        <p className="text-center font-medium text-sm my-1">or</p>
+        <div className="space-y-1 mt-2">
+          <SocialLogin />
+          <div>
+            <div className="text-sm text-center">
+              <Link to="/forgot-password" className="text-primary underline">
+                Forgot Password?
+              </Link>
+            </div>
+            <span>Don't have an account?</span>{" "}
+            <Link to="/auth/register" className="text-primary underline">
+              Register
+            </Link>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

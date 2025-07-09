@@ -14,13 +14,13 @@ export default function NavBar() {
         <Logo />
         <div className="items-center gap-1 font-primary font-semibold text-base hidden sm:flex">
           <button
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/auth/login")}
             className="py-[15px] px-[20px]"
           >
             Login
           </button>
           <button
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/auth/register")}
             className="py-4 px-8 rounded-full bg-[#4361ee] text-white"
           >
             Sign Up

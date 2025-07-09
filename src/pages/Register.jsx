@@ -9,6 +9,7 @@ import { updateProfile } from "firebase/auth";
 import auth from "../config/firebase";
 import { getIdToken } from "firebase/auth";
 import PasswordShowToggle from "../components/PasswordShowToggle";
+import SocialLogin from "../components/SocialLogin";
 
 export default function Register() {
   const {
@@ -115,139 +116,138 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-5 md:p-8 min-h-screen">
-      <div className="pb-5 mb-2">
-        <img
-          src={assets.logo}
-          alt="logo"
-          className="w-[45px] h-[25px] mx-auto"
-        />
+    <div className="flex flex-col items-center justify-center p-5 md:p-8">
+      <div className="pb-[35px]">
         <h2 className="text-[#212529] text-[25px] text-center sm:text-3xl font-secondary mt-2 font-semibold">
           Join WorkSync as an Employee or HR
         </h2>
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md mx-auto bg-white p-5 sm:p-8 rounded-lg shadow space-y-4"
-      >
-        <label className="cursor-pointer">
-          <img
-            className="w-14 h-14 object-cover rounded-full"
-            src={preview || assets.uploadIcon}
-            alt=""
-          />
-          <input onChange={handleImageChange} type="file" hidden />
-        </label>
-        <input
-          placeholder="Full Name"
-          {...register("name", { required: true })}
-          className="w-full border px-4 py-2 rounded focus:outline-none"
-        />
-        {errors.name && (
-          <p className="text-red-500 text-sm">Name is required</p>
-        )}
-
-        <input
-          placeholder="Email Address"
-          type="email"
-          {...register("email", { required: true })}
-          className="w-full border px-4 py-2 rounded focus:outline-none"
-        />
-        {errors.email && (
-          <p className="text-red-500 text-sm">Email is required</p>
-        )}
-
-        <div className="relative">
+      <div className="max-w-md mx-auto p-5 sm:p-8 rounded border">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full  bg-white  space-y-4"
+        >
+          <label className="cursor-pointer">
+            <img
+              className="w-14 h-14 md:w-16 md:h-16 object-cover rounded-full"
+              src={preview || assets.uploadIcon}
+              alt=""
+            />
+            <input onChange={handleImageChange} type="file" hidden />
+          </label>
           <input
-            placeholder="Password"
-            type={showPassword ? "text" : "password"}
-            {...register("password", {
-              required: true,
-              minLength: 6,
-              validate: {
-                hasUpper: (v) => /[A-Z]/.test(v) || "Must contain uppercase",
-                hasSpecial: (v) =>
-                  /[!@#$%^&*(),.?":{}|<>]/.test(v) ||
-                  "Must contain special character",
-              },
-            })}
+            placeholder="Full Name"
+            {...register("name", { required: true })}
             className="w-full border px-4 py-2 rounded focus:outline-none"
           />
-
-          {/* Toggle Button */}
-          <PasswordShowToggle
-            showPassword={showPassword}
-            setShowPassword={setShowPassword}
-          />
-          {errors.password && (
-            <p className="text-red-500 text-sm">
-              {errors.password.message || "Password invalid"}
-            </p>
+          {errors.name && (
+            <p className="text-red-500 text-sm">Name is required</p>
           )}
-        </div>
 
-        <input
-          placeholder="Bank Account No"
-          {...register("bank_account_no", { required: true })}
-          className="w-full border px-4 py-2 rounded focus:outline-none"
-        />
-        {errors.bank_account_no && (
-          <p className="text-red-500 text-sm">Bank Account No is required</p>
-        )}
+          <input
+            placeholder="Email Address"
+            type="email"
+            {...register("email", { required: true })}
+            className="w-full border px-4 py-2 rounded focus:outline-none"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">Email is required</p>
+          )}
 
-        <input
-          placeholder="Salary"
-          type="number"
-          {...register("salary", { required: true })}
-          className="w-full border px-4 py-2 rounded focus:outline-none"
-        />
-        {errors.salary && (
-          <p className="text-red-500 text-sm">Salary is required</p>
-        )}
+          <div className="relative">
+            <input
+              placeholder="Password"
+              type={showPassword ? "text" : "password"}
+              {...register("password", {
+                required: true,
+                minLength: 6,
+                validate: {
+                  hasUpper: (v) => /[A-Z]/.test(v) || "Must contain uppercase",
+                  hasSpecial: (v) =>
+                    /[!@#$%^&*(),.?":{}|<>]/.test(v) ||
+                    "Must contain special character",
+                },
+              })}
+              className="w-full border px-4 py-2 rounded focus:outline-none"
+            />
 
-        <input
-          placeholder="Designation (e.g., Sales Assistant)"
-          {...register("designation", { required: true })}
-          className="w-full border px-4 py-2 rounded focus:outline-none"
-        />
-        {errors.designation && (
-          <p className="text-red-500 text-sm">Designation is required</p>
-        )}
+            {/* Toggle Button */}
+            <PasswordShowToggle
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm">
+                {errors.password.message || "Password invalid"}
+              </p>
+            )}
+          </div>
 
-        <select
-          {...register("role", { required: true })}
-          className="w-full border px-4 py-2 rounded focus:outline-none"
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Select Role
-          </option>
-          <option value="employee">Employee</option>
-          <option value="hr">HR</option>
-        </select>
-        {errors.role && (
-          <p className="text-red-500 text-sm">Role is required</p>
-        )}
+          <input
+            maxLength={14}
+            placeholder="Bank Account No"
+            {...register("bank_account_no", { required: true })}
+            className="w-full border px-4 py-2 rounded focus:outline-none"
+          />
+          {errors.bank_account_no && (
+            <p className="text-red-500 text-sm">Bank Account No is required</p>
+          )}
 
-        <button
-          disabled={isImageUpload || loading}
-          type="submit"
-          className="w-full bg-secondary text-white py-2 rounded hover:bg-opacity-80"
-        >
-          {isImageUpload
-            ? "Uploading image..."
-            : loading
-            ? "Creating account..."
-            : "Register"}
-        </button>
+          <input
+            placeholder="Salary"
+            type="number"
+            {...register("salary", { required: true })}
+            className="w-full border px-4 py-2 rounded focus:outline-none"
+          />
+          {errors.salary && (
+            <p className="text-red-500 text-sm">Salary is required</p>
+          )}
 
+          <input
+            placeholder="Designation (e.g., Sales Assistant)"
+            {...register("designation", { required: true })}
+            className="w-full border px-4 py-2 rounded focus:outline-none"
+          />
+          {errors.designation && (
+            <p className="text-red-500 text-sm">Designation is required</p>
+          )}
+
+          <select
+            {...register("role", { required: true })}
+            className="w-full border px-4 py-2 rounded focus:outline-none"
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select Role
+            </option>
+            <option value="employee">Employee</option>
+            <option value="hr">HR</option>
+          </select>
+          {errors.role && (
+            <p className="text-red-500 text-sm">Role is required</p>
+          )}
+
+          <button
+            disabled={isImageUpload || loading}
+            type="submit"
+            className="w-full font-semibold text-lg bg-[#035fcb] text-white py-2 rounded hover:bg-[#3769DA] transition-colors"
+          >
+            {isImageUpload
+              ? "Uploading image..."
+              : loading
+              ? "Creating account..."
+              : "Register"}
+          </button>
+        </form>
+        <p className="text-center my-1 text-sm font-medium">or</p>
+        <SocialLogin>Register with Google</SocialLogin>
         <p className="text-sm text-center mt-4">
           Already have an account?
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link to="/auth/login" className="text-blue-600 hover:underline">
             Login
           </Link>
         </p>
-      </form>
+      </div>
     </div>
   );
 }

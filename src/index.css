@@ -10,3 +10,6 @@
 .max-w{
     max-width: 1220px;
 }
+input{
+    @apply focus:outline-none focus:ring-2
+}

@@ -29,6 +29,18 @@ export default function AdminEmployeeManagement() {
     }
   };
 
+  const fireEmployee = async () => {
+    try {
+      await axiosInstance.patch(`/admin/employees/${fireModal.userId}/fire`);
+      toast.error("Employee fired");
+      queryClient.invalidateQueries(["allEmployees"]);
+    } catch (error) {
+      toast.error(`failed to employee fired ${error.message}`);
+    } finally {
+      setFireModal({ isOpen: false, userId: null });
+    }
+  };
+
 
 
   if (isLoading) return <p>Loading...</p>;

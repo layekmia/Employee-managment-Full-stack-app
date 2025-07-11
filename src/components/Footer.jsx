@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="bg-[#2B405A] text-gray-300 py-10 px-6">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 justify-center md:justify-between items-center">
         {/* Left Side */}
-        <div className="space-y-8 flex items-center md:items-start flex-col">
+        <div className="space-y-8 flex items-center md:items-start flex-col font-secondary">
           <div className="flex items-center md:items-start flex-col justify-center">
             <Logo className="text-white" />
             <p className="max-w-sm text-sm text-white mt-1">
@@ -23,8 +23,7 @@ export default function Footer() {
           </Link>
         </div>
 
-        {/* Right Side */}
-        <div className="flex justify-start md:justify-end">
+        <div className="flex justify-start md:justify-end font-medium">
           <div className=" flex flex-col gap-3 text-sm text-white">
             <Link to="/" className="hover:text-blue-600 transition">
               Home

@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import auth from "../config/firebase";
 import Spinner from "../components/Spinner";
@@ -19,6 +20,11 @@ export default function AuthContextProvider({ children }) {
 
   const signInUser = ({ email, password }) => {
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const signOutUser = async () => {
+    console.log("logout")
+    await signOut(auth);
   };
 
   useEffect(() => {
@@ -39,14 +45,12 @@ export default function AuthContextProvider({ children }) {
     });
     return () => unsubscribe();
   }, []);
-  console.log(user)
+  console.log(user);
 
-  if(isAuthChecking) return <Spinner/>
+  if (isAuthChecking) return <Spinner />;
 
   return (
-    <AuthContext.Provider
-      value={{ createUser, signInUser, user }}
-    >
+    <AuthContext.Provider value={{ createUser, signInUser, user, signOutUser }}>
       {children}
     </AuthContext.Provider>
   );

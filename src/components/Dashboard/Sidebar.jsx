@@ -1,15 +1,25 @@
 import { NavLink } from "react-router-dom";
 import { FaTachometerAlt, FaUsers, FaMoneyCheck, FaCog } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
+import { BsCardChecklist } from "react-icons/bs";
+import { GiProgression } from "react-icons/gi";
+import { AiOutlineFileText } from "react-icons/ai";
+import { TbReportMoney } from "react-icons/tb";
+import { FaMoneyCheckAlt } from "react-icons/fa";
+import { MdOutlineAttachMoney } from "react-icons/md";
+
+
+
 
 // Example icon mapping (you can improve it)
 const icons = {
-  overview: <FaTachometerAlt />,
-  "work-sheet": <FaMoneyCheck />,
+  overview: <MdDashboard />,
+  "work-sheet": <AiOutlineFileText />,
   "payment-history": <FaMoneyCheck />,
   "employee-list": <FaUsers />,
-  progress: <FaUsers />,
+  progress: <GiProgression />,
   "all-employee": <FaUsers />,
-  payroll: <FaMoneyCheck />,
+  payroll: <FaMoneyCheckAlt />,
   settings: <FaCog />,
 };
 
@@ -17,13 +27,13 @@ const icons = {
 const menu = [
   {
     path: "/dashboard/overview",
-    label: "Overview",
+    label: "Dashboard",
     key: "overview",
     role: ["admin", "hr", "employee"],
   },
   {
     path: "/dashboard/work-sheet",
-    label: "Work-Sheet",
+    label: "Task Records",
     key: "work-sheet",
     role: ["employee"],
   },
@@ -35,7 +45,7 @@ const menu = [
   },
   {
     path: "/dashboard/employee-list",
-    label: "Employee List",
+    label: "Employees",
     key: "employee-list",
     role: ["hr"],
   },
@@ -47,7 +57,7 @@ const menu = [
   },
   {
     path: "/dashboard/all-employee",
-    label: "All Employee",
+    label: "All Employees",
     key: "all-employee",
     role: ["admin"],
   },
@@ -65,7 +75,7 @@ const menu = [
   },
 ];
 
-export default function SidebarMenu({ userRole, isCollapsed, setSidebarToggle }) {
+export default function SidebarMenu({ userRole, setSidebarToggle }) {
   return (
     <nav className="flex flex-col mt-3">
       {menu
@@ -76,15 +86,15 @@ export default function SidebarMenu({ userRole, isCollapsed, setSidebarToggle })
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-5 py-3 border-l-4    hover:bg-[#266dfb10] font-secondary  ${
+              `flex items-center gap-[6px] px-5 py-3 border-l-4    hover:bg-[#266dfb10] font-secondary  ${
                 isActive
                   ? "bg-[#266dfb10] font-semibold text-[#266dfb]  border-[#266dfb] text-base"
-                  : "border-transparent text-gray-500"
+                  : "border-transparent text-[#333333]"
               }`
             }
           >
-            <span className="text-xl">{icons[item.key]}</span>
-            <span>{item.label}</span>
+            <span className="text-base text-gray-500">{icons[item.key]}</span>
+            <span className="font-secondary text-[15.5px]">{item.label}</span>
           </NavLink>
         ))}
     </nav>

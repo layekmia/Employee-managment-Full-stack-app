@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Left Side */}
         <div className="space-y-8 flex items-center md:items-start flex-col font-secondary">
           <div className="flex items-center md:items-start flex-col justify-center">
-            <Logo className="text-white" />
+            <Logo color="text-white" />
             <p className="max-w-sm text-sm text-white mt-1">
               Employee monitoring and timesheets for remote teams
             </p>

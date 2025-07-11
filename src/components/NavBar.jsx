@@ -43,7 +43,9 @@ export default function NavBar() {
               <DropdownItem>
                 <Link to="/dashboard">Dashboard</Link>
               </DropdownItem>
-              <DropdownItem><Link to='/dashboard/settings'>Settings</Link></DropdownItem>
+              <DropdownItem>
+                <Link to="/dashboard/settings">Settings</Link>
+              </DropdownItem>
               <DropdownDivider />
               <DropdownItem onClick={signOutUser}>Sign out</DropdownItem>
             </Dropdown>

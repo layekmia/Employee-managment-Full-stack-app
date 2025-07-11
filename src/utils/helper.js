@@ -9,7 +9,7 @@ const generateRandomBankAccount = () => {
 
 const dashboardRouteTitles = {
   "/dashboard/overview": "Overview",
-  "/dashboard/work-sheet": "Work Sheet",
+  "/dashboard/work-sheet": "Task Records",
   "/dashboard/payment-history": "Payment History",
   "/dashboard/employee-list": "Employee List",
   "/dashboard/progress": "Progress",

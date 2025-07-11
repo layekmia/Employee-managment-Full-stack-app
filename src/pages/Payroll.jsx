@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
-import { useState } from "react";
 
 export default function PayrollPage() {
   const queryClient = useQueryClient();

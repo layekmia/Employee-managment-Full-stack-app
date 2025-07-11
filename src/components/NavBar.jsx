@@ -9,8 +9,8 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   return (
-    <header>
-      <nav className="flex items-center justify-between max-w mx-auto h-20 bg-white px-5 relative z-10">
+    <header className="shadow-md">
+      <nav className="flex items-center justify-between max-w mx-auto h-20 bg-white px-5 relative z-20">
         <Logo />
         <div className="items-center gap-1 font-primary font-semibold text-base hidden sm:flex">
           <button

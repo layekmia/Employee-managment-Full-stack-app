@@ -1,34 +1,104 @@
 import { assets } from "../../assets/assets";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
+
   return (
     <div className=" bg-[#f7fcfe] hero">
-      <div className="max-w-6xl mx-auto  h-[560px] flex flex-col items-center justify-center gap-5 sm:gap-10 px-6 lg:px-0">
-        <h1 className="text-3xl sm:text-[64px] text-primary font-bold pt-5 mb-2.5 text-center leading-[40px] sm:leading-[64px]">
-          Employee monitoring <br /> software with time tracking
-        </h1>
-        <p className="text-primary text-lg sm:text-xl font-normal font-primary text-center ">
-          Boost your team productivity by 2x with an intelligent monitoring
-          system
-        </p>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between sm:w-full max-w-4xl mx-auto gap-5">
-          <div className="flex items-center gap-2 text-[#333333] font-bold text-lg font-primary ">
-            <img src={assets.checkIcon} alt="icon" />
-            <p>Activity Monitoring</p>
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        modules={[Autoplay, Pagination, Navigation]}
+        className=" rounded-b-lg overflow-hidden"
+      >
+        {/* Slide 1 */}
+        <SwiperSlide>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-5 md:p-10 h-[calc(100vh-80px)] sm:max-h-[527px]">
+            <div>
+              <h2 className="text-[25px] md:text-5xl font-bold mb-4 font-primary">
+                The All-in-One Employee Management Platform
+              </h2>
+              <p className="mb-6 font-primary">
+                Manage Payroll, Tasks & Performance—All in One Place.
+              </p>
+              <button
+                className="px-6 py-3 bg-white text-blue-600 rounded font-semibold hover:bg-gray-100"
+                onClick={() => navigate("/auth/register")}
+              >
+                Get Started
+              </button>
+            </div>
+            <img
+              src="https://img.freepik.com/free-vector/gradient-crm-illustration_23-2149373198.jpg?semt=ais_hybrid&w=740"
+              alt="App Screenshot"
+              className="rounded-lg  sm:h-[300px] md:h-[400px] object-cover inline-block mx-auto"
+            />
           </div>
-          <div className="flex items-center gap-2 text-[#333333] font-bold text-lg font-primary ">
-            <img src={assets.checkIcon} alt="icon" />
-            <p>Optional Screenshots</p>
+        </SwiperSlide>
+
+        {/* Slide 2 */}
+        <SwiperSlide>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-gradient-to-r from-green-500 to-teal-600 text-white p-5 md:p-10 h-[calc(100vh-80px)] sm:max-h-[527px]">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                Trusted by 100+ Companies Worldwide
+              </h2>
+              <p className="mb-6">
+                From startups to enterprises, our platform powers employee
+                management across industries.
+              </p>
+              <button className="px-6 py-3 bg-white text-green-600 rounded font-semibold hover:bg-gray-100">
+                See How They Succeed
+              </button>
+            </div>
+            <div className="flex flex-col">
+              <img
+                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80"
+                alt="Company 1"
+                className="h-[150px] sm:h-[220px] ml-20 object-contain"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80"
+                alt="Company 2"
+                className=" h-[150px] sm:h-[220px] object-contain -mt-5"
+              />
+            </div>
           </div>
-          <div className="flex items-center gap-2 text-[#333333] font-bold text-lg font-primary ">
-            <img src={assets.checkIcon} alt="icon" />
-            <p>Accurate Timesheets</p>
+        </SwiperSlide>
+
+        {/* Slide 3 */}
+        <SwiperSlide>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-gradient-to-r from-purple-500 to-pink-600 text-white p-10 h-[calc(100vh-80px)] sm:max-h-[527px]">
+            <div>
+              <h2 className="text-[25px] md:text-5xl font-bold mb-4">
+                Simplify HR Workflows. Save Hours Every Day.
+              </h2>
+              <ul className="list-disc ml-5 mb-6 space-y-2">
+                <li>Secure Payroll Processing</li>
+                <li>Real-Time Performance Analytics</li>
+                <li>Seamless Team Collaboration</li>
+                <li>Role-based Access Control</li>
+              </ul>
+              <button className="px-6 py-3 bg-white text-pink-600 rounded font-semibold hover:bg-gray-100">
+                Start Free Trial
+              </button>
+            </div>
+            <img
+              src="https://assets.designtemplate.io/images/Vector%20Illustration%20of%20Team%20Members%20Collaborating%20During%20a%20Business%20Meeting-thumbnail.webp"
+              alt="Team Collaboration"
+              className="rounded-lg shadow-lg max-md:h-[200px] max-md:mx-auto"
+            />
           </div>
-        </div>
-        <button className="py-4 px-2.5 sm:px-8 rounded-full bg-[#4361ee] text-white font-primary max-sm:mt-10 text-sm sm:text-base">
-          Start monitoring your team - it's free!
-        </button>
-      </div>
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 }

@@ -5,27 +5,27 @@ export default function MobileNav({ isNavToggle, setIsNavToggle }) {
   const navRef = useRef();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      // Check if the clicked element is NOT inside navRef
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setIsNavToggle(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (e) => {
+  //     // Check if the clicked element is NOT inside navRef
+  //     if (navRef.current && !navRef.current.contains(e.target)) {
+  //       setIsNavToggle(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [setIsNavToggle]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [setIsNavToggle]);
 
 
 
   return (
     <div
       ref={navRef}
-      className={`items-center gap-1 font-primary font-semibold text-base absolute flex-col flex top-20 bg-white left-0 right-0 px-5 py-5 transition-transform duration-300 ${
+      className={`items-center gap-1 font-primary font-semibold text-base absolute flex-col flex top-20 bg-white left-0 right-0 px-5 py-5 transition-transform duration-300 z-10 ${
         isNavToggle ? "-translate-y-0" : "-translate-y-[300px]"
       }`}
     >

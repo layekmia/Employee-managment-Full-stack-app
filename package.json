@@ -19,6 +19,7 @@
     "flowbite": "^3.1.2",
     "flowbite-react": "^0.11.8",
     "framer-motion": "^12.23.0",
+    "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-datepicker": "^8.4.0",
     "react-dom": "^19.1.0",
@@ -28,6 +29,7 @@
     "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^7.6.3",
     "react-toastify": "^11.0.5",
+    "recharts": "^3.1.0",
     "sweetalert2": "^11.22.2"
   },
   "devDependencies": {

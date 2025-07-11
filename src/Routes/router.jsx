@@ -14,6 +14,7 @@ import Progress from "../pages/Progress";
 import AllEmployee from "../pages/AllEmployee";
 import Payroll from "../pages/Payroll";
 import Settings from "../pages/Settings";
+import SlugDetails from "../components/Dashboard/SlugDetails";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       {path: '/dashboard/work-sheet', element: <WorkSheet/>},
       {path: '/dashboard/payment-history', element: <PaymentHistory/>},
       {path: '/dashboard/employee-list', element: <EmployeeList/>},
+      {path: '/dashboard/employee-list/:id', element: <SlugDetails/>},
       {path: '/dashboard/progress', element: <Progress/>},
       {path: '/dashboard/all-employee', element: <AllEmployee/>},
       {path: '/dashboard/payroll', element: <Payroll/>},

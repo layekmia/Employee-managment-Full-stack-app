@@ -19,6 +19,10 @@ export default function WorkSheet() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
+  const selectedMonth = selectedDate.toLocaleString("default", {
+    month: "long",
+  });
+
   const {
     data: workData = [],
     isLoading,
@@ -33,16 +37,20 @@ export default function WorkSheet() {
 
   const onSubmit = async (data) => {
     const newEntry = {
+      employeeName: user.name,
       task: data.task,
       hours: Number(data.hours),
       date: selectedDate.toISOString(),
+      month: selectedMonth,
       userUID: user.uid,
     };
+    console.log(newEntry)
     reset();
     setSelectedDate(new Date());
 
     const res = await axiosInstance.post("/employee-task", newEntry);
     console.log(res.data);
+    console.log(newEntry);
     refetch();
   };
 

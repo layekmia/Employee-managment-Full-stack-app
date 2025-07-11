@@ -16,6 +16,7 @@
     "@stripe/stripe-js": "^7.4.0",
     "@tanstack/react-query": "^5.81.5",
     "@tanstack/react-table": "^8.21.3",
+    "aos": "^2.3.4",
     "axios": "^1.10.0",
     "firebase": "^11.10.0",
     "flowbite": "^3.1.2",

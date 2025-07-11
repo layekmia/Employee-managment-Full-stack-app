@@ -19,7 +19,6 @@ export default function Hero() {
         modules={[Autoplay, Pagination, Navigation]}
         className=" rounded-b-lg overflow-hidden"
       >
-        {/* Slide 1 */}
         <SwiperSlide>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-5 md:p-10 h-[calc(100vh-80px)] sm:max-h-[527px]">
             <div>
@@ -37,14 +36,13 @@ export default function Hero() {
               </button>
             </div>
             <img
-              src="https://img.freepik.com/free-vector/gradient-crm-illustration_23-2149373198.jpg?semt=ais_hybrid&w=740"
+              src={assets.dashboard}
               alt="App Screenshot"
               className="rounded-lg  sm:h-[300px] md:h-[400px] object-cover inline-block mx-auto"
             />
           </div>
         </SwiperSlide>
 
-        {/* Slide 2 */}
         <SwiperSlide>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-gradient-to-r from-green-500 to-teal-600 text-white p-5 md:p-10 h-[calc(100vh-80px)] sm:max-h-[527px]">
             <div>
@@ -61,20 +59,18 @@ export default function Hero() {
             </div>
             <div className="flex flex-col">
               <img
-                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80"
+                src={assets.meeting2}
                 alt="Company 1"
                 className="h-[150px] sm:h-[220px] ml-20 object-contain"
               />
               <img
-                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80"
+                src={assets.meeting1}
                 alt="Company 2"
                 className=" h-[150px] sm:h-[220px] object-contain -mt-5"
               />
             </div>
           </div>
         </SwiperSlide>
-
-        {/* Slide 3 */}
         <SwiperSlide>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-gradient-to-r from-purple-500 to-pink-600 text-white p-10 h-[calc(100vh-80px)] sm:max-h-[527px]">
             <div>
@@ -92,7 +88,7 @@ export default function Hero() {
               </button>
             </div>
             <img
-              src="https://assets.designtemplate.io/images/Vector%20Illustration%20of%20Team%20Members%20Collaborating%20During%20a%20Business%20Meeting-thumbnail.webp"
+              src={assets.collaboration}
               alt="Team Collaboration"
               className="rounded-lg shadow-lg max-md:h-[200px] max-md:mx-auto"
             />

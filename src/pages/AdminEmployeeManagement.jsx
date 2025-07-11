@@ -41,7 +41,17 @@ export default function AdminEmployeeManagement() {
     }
   };
 
-
+  const updateSalary = async (id, newSalary) => {
+    try {
+      await axiosInstance.patch(`/admin/employees/${id}/salary`, {
+        salary: newSalary,
+      });
+      toast.success("Salary updated");
+      queryClient.invalidateQueries(["allEmployees"]);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   if (isLoading) return <p>Loading...</p>;
 

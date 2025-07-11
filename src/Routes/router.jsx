@@ -11,10 +11,10 @@ import WorkSheet from "../pages/WorkSheet";
 import PaymentHistory from "../pages/PaymentHistory";
 import EmployeeList from "../pages/EmployeeList";
 import Progress from "../pages/Progress";
-import AllEmployee from "../pages/AllEmployee";
 import Payroll from "../pages/Payroll";
 import Settings from "../pages/Settings";
 import SlugDetails from "../components/Dashboard/SlugDetails";
+import AdminEmployeeManagement from "../pages/AdminEmployeeManagement";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {path: '/dashboard/employee-list', element: <EmployeeList/>},
       {path: '/dashboard/employee-list/:id', element: <SlugDetails/>},
       {path: '/dashboard/progress', element: <Progress/>},
-      {path: '/dashboard/all-employee', element: <AllEmployee/>},
+      {path: '/dashboard/all-employee', element: <AdminEmployeeManagement/>},
       {path: '/dashboard/payroll', element: <Payroll/>},
       {path: '/dashboard/settings', element: <Settings/>},
     ],

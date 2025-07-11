@@ -42,7 +42,6 @@ export default function WorkSheet() {
       hours: Number(data.hours),
       date: selectedDate.toISOString(),
       month: selectedMonth,
-      userUID: user.uid,
     };
     console.log(newEntry)
     reset();

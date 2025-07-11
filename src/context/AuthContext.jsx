@@ -39,6 +39,7 @@ export default function AuthContextProvider({ children }) {
     });
     return () => unsubscribe();
   }, []);
+  console.log(user)
 
   if(isAuthChecking) return <Spinner/>
 

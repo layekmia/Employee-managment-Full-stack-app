@@ -9,7 +9,6 @@ export default function EmployeeList() {
   const {
     data: employees = [],
     isLoading: employeeLoading,
-    refetch,
   } = useQuery({
     queryKey: ["employees"],
     queryFn: async () => {
@@ -20,8 +19,7 @@ export default function EmployeeList() {
 
   const {
     data: monthlyPayments = [],
-    isLoading: paymentLoading,
-    error,
+    isLoading: paymentLoading, refetch
   } = useQuery({
     queryKey: ["monthlyPayments"],
     queryFn: async () => {
@@ -35,9 +33,6 @@ export default function EmployeeList() {
       return res.data;
     },
   });
-
-  console.log(monthlyPayments);
-  console.log(error);
 
   const [openPayModal, setOpenPayModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);

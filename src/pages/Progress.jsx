@@ -11,6 +11,7 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
+import Spinner from "../components/Dashboard/Spinner";
 
 const months = [
   "January",
@@ -134,21 +135,26 @@ export default function Progress() {
       {/* Table */}
       <div className="overflow-x-auto">
         {isLoading ? (
-          <div className="text-center py-10">Loading...</div>
+          <Spinner />
         ) : (
           <div className="overflow-x-auto">
             <Table striped>
               <TableHead>
                 <TableHeadCell className="bg-blue-50">Employee</TableHeadCell>
                 <TableHeadCell className="bg-blue-50">Task</TableHeadCell>
-                <TableHeadCell className="bg-blue-50">Hours Worked</TableHeadCell>
+                <TableHeadCell className="bg-blue-50">
+                  Hours Worked
+                </TableHeadCell>
                 <TableHeadCell className="bg-blue-50">Date</TableHeadCell>
               </TableHead>
 
               <TableBody className="divide-y">
                 {workRecords.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan="4" className="text-center py-4 text-base font-semibold font-secondary">
+                    <TableCell
+                      colSpan="4"
+                      className="text-center py-4 text-base font-semibold font-secondary"
+                    >
                       No records found.
                     </TableCell>
                   </TableRow>
@@ -161,8 +167,12 @@ export default function Progress() {
                       <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                         {record.employeeName}
                       </TableCell>
-                      <TableCell className="font-medium font-secondary">{record.task}</TableCell>
-                      <TableCell className="font-medium text-green-600">{record.hours}h</TableCell>
+                      <TableCell className="font-medium font-secondary">
+                        {record.task}
+                      </TableCell>
+                      <TableCell className="font-medium text-green-600">
+                        {record.hours}h
+                      </TableCell>
                       <TableCell className="font-medium">
                         {new Date(record.date).toLocaleDateString()}
                       </TableCell>

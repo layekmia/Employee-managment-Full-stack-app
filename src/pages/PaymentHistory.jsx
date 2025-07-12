@@ -11,10 +11,10 @@ import {
   TableRow,
   Badge,
 } from "flowbite-react";
-
+import { formatDate } from "../utils/helper";
+import Spinner from "../components/Dashboard/Spinner";
 
 export default function PaymentHistory() {
-
   const { user } = useAuth();
 
   const { data: paymentsHistory = [], isLoading } = useQuery({
@@ -25,7 +25,7 @@ export default function PaymentHistory() {
     },
   });
 
-  console.log(paymentsHistory);
+  if(isLoading) return <Spinner/>
 
   return (
     <div className="overflow-x-auto">
@@ -40,9 +40,9 @@ export default function PaymentHistory() {
           {paymentsHistory.map((payment) => (
             <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
               <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {payment.paymentDate || "Processing"}
+                {formatDate(new Date(payment.paymentDate)) || "Processing"}
               </TableCell>
-              <TableCell>{payment.salary}</TableCell>
+              <TableCell className="font-medium text-green-600">{payment.salary} TK</TableCell>
               <TableCell>{payment.transactionId || "--"}</TableCell>
               <TableCell>
                 {payment.paymentStatus === "Paid" ? (

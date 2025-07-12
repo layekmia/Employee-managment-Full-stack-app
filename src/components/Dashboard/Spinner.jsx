@@ -1,5 +1,7 @@
 export default function Spinner() {
   return (
-    <div>Spinner</div>
+    <div className="absolute inset-0 z-20 flex items-center justify-center bg-white bg-opacity-70">
+      <div className="w-12 h-12 rounded-full border-[5px] border-dotted border-t-transparent border-blue-600 animate-spin"></div>
+    </div>
   );
 }

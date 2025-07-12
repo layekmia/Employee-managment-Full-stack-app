@@ -16,6 +16,7 @@ import {
 } from "flowbite-react";
 import { RxCross2 } from "react-icons/rx";
 import { assets } from "../assets/assets";
+import Spinner from "../components/Dashboard/Spinner";
 
 export default function EmployeeList() {
   const { data, isLoading, refetch } = useQuery({
@@ -64,10 +65,10 @@ export default function EmployeeList() {
     setOpenPayModal(false);
   };
 
-  if (isLoading) return <div className="text-center p-5">Loading...</div>;
+  if (isLoading) return <Spinner/>
 
   return (
-    <div>
+    <div className="relative">
       <div className="overflow-x-auto">
         <Table striped>
           <TableHead>
@@ -108,7 +109,7 @@ export default function EmployeeList() {
                     </button>
                   </TableCell>
                   <TableCell>{employee.bank_account_no || "N/A"}</TableCell>
-                  <TableCell>{employee.salary}</TableCell>
+                  <TableCell className="font-medium text-green-600">{employee.salary} TK</TableCell>
                   <TableCell>
                     {isPaid ? (
                       <Badge color="success" className="w-fit">
@@ -128,7 +129,7 @@ export default function EmployeeList() {
                   </TableCell>
 
                   <TableCell>
-                    <button className="text-blue-700 font-secondary font-medium hover:underline">
+                    <button onClick={() => navigate(`/dashboard/employee-list/${employee._id}`)} className="text-blue-700 font-secondary font-medium hover:underline">
                       Details
                     </button>
                   </TableCell>

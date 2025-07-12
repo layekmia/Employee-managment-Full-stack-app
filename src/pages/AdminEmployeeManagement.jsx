@@ -11,6 +11,7 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
+import Spinner from "../components/Dashboard/Spinner";
 
 export default function AdminEmployeeManagement() {
   const queryClient = useQueryClient();
@@ -61,7 +62,7 @@ export default function AdminEmployeeManagement() {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Spinner/>;
 
   return (
     <div className="p-6">

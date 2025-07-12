@@ -111,56 +111,66 @@ const hrSolutions = [
   },
 ];
 
-
-
 const testimonials = [
   {
-    name: 'David Martinez',
-    role: 'HR Manager',
-    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+    name: "David Martinez",
+    role: "HR Manager",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
     rating: 4.5,
-    text: 'Get smarter and more efficient software with features designed to free you from administrative work. Join us and find out why.',
+    text: "Get smarter and more efficient software with features designed to free you from administrative work. Join us and find out why.",
   },
   {
-    name: 'Samantha Payne',
-    role: 'HR Analyst',
-    image: 'https://randomuser.me/api/portraits/women/44.jpg',
+    name: "Samantha Payne",
+    role: "HR Analyst",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
     rating: 4,
-    text: 'It’s easy to use, serves the purpose well with good information. Especially to manage HR tasks, it’s reliable and time-saving.',
+    text: "It’s easy to use, serves the purpose well with good information. Especially to manage HR tasks, it’s reliable and time-saving.",
   },
   {
-    name: 'Albert Flores',
-    role: 'Payroll Admin',
-    image: 'https://randomuser.me/api/portraits/men/45.jpg',
+    name: "Albert Flores",
+    role: "Payroll Admin",
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
     rating: 5,
-    text: 'An absolute game-changer for streamlining HR processes! The app makes managing employees a breeze.',
+    text: "An absolute game-changer for streamlining HR processes! The app makes managing employees a breeze.",
   },
   {
-    name: 'Devon Lane',
-    role: 'Chief Executive',
-    image: 'https://randomuser.me/api/portraits/men/54.jpg',
+    name: "Devon Lane",
+    role: "Chief Executive",
+    image: "https://randomuser.me/api/portraits/men/54.jpg",
     rating: 4.5,
-    text: 'Super intuitive and efficient! This app has simplified every aspect of HR management for our team, saving us so much time.',
+    text: "Super intuitive and efficient! This app has simplified every aspect of HR management for our team, saving us so much time.",
   },
   {
-    name: 'Samantha payne',
-    role: 'Chief Executive',
-    image: 'https://d27snf008ywx0f.cloudfront.net/wp-content/uploads/2025/01/wol-img2.svg',
+    name: "Samantha payne",
+    role: "Chief Executive",
+    image:
+      "https://d27snf008ywx0f.cloudfront.net/wp-content/uploads/2025/01/wol-img2.svg",
     rating: 4.5,
-    text: 'Super intuitive and efficient! This app has simplified every aspect of HR management for our team, saving us so much time.',
+    text: "Super intuitive and efficient! This app has simplified every aspect of HR management for our team, saving us so much time.",
   },
   {
-    name: 'David Martinez',
-    role: 'Chief Executive',
-    image: 'https://d27snf008ywx0f.cloudfront.net/wp-content/uploads/2025/01/wol-img5.svg',
+    name: "David Martinez",
+    role: "Chief Executive",
+    image:
+      "https://d27snf008ywx0f.cloudfront.net/wp-content/uploads/2025/01/wol-img5.svg",
     rating: 4.5,
-    text: 'Super intuitive and efficient! This app has simplified every aspect of HR management for our team, saving us so much time.',
+    text: "Super intuitive and efficient! This app has simplified every aspect of HR management for our team, saving us so much time.",
   },
 ];
+
+const formatDate = (date) => {
+  return Intl.DateTimeFormat("en-us", {
+    month: "long",
+    year: "numeric",
+  }).format(date);
+};
+
+
 export {
   generateRandomBankAccount,
   dashboardRouteTitles,
   services,
   hrSolutions,
   testimonials,
+  formatDate,
 };

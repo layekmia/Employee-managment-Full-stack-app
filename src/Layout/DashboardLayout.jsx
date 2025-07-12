@@ -16,7 +16,6 @@ import useAuth from "../hook/useAuth";
 import useTheme from "../hook/useTheme";
 import { FaMoon } from "react-icons/fa";
 import { IoSunnySharp } from "react-icons/io5";
-import Checkout from "../components/Dashboard/Checkout";
 
 export default function DashboardLayout() {
   const location = useLocation();
@@ -107,7 +106,6 @@ export default function DashboardLayout() {
             <Outlet />
           </main>
         </div>
-      <Checkout />
       </div>
   );
 }

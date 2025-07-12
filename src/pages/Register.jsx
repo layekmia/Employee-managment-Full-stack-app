@@ -193,7 +193,8 @@ export default function Register() {
           </div>
 
           <input
-            maxLength={14}
+            maxLength={13}
+            minLength={10}
             placeholder="Bank Account No"
             {...register("bank_account_no", { required: true })}
             className="w-full border px-4 py-2 rounded focus:outline-none"

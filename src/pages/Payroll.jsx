@@ -11,11 +11,17 @@ import {
   Badge,
   Button,
 } from "flowbite-react";
+import { useState } from "react";
+import Checkout from "../components/Dashboard/CheckOut";
+import Spinner from "../components/Dashboard/Spinner";
 
 export default function PayrollPage() {
   const queryClient = useQueryClient();
 
-  const { data: payments = [], isLoading } = useQuery({
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const { data: payments = [], isLoading, refetch } = useQuery({
     queryKey: ["payroll"],
     queryFn: async () => {
       const res = await axiosInstance.get("admin/employees/payment-requests");
@@ -35,11 +41,8 @@ export default function PayrollPage() {
     onError: () => toast.error("Payment failed!"),
   });
 
-  const handlePay = async (paymentId) => {
-    await paySalary(paymentId);
-  };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner/>
 
   return (
     <div className="overflow-x-auto rounded-sm shadow">
@@ -70,7 +73,7 @@ export default function PayrollPage() {
                 </TableCell>
 
                 <TableCell className="text-green-600 font-semibold">
-                  ${payment.salary}
+                  {payment.salary} BDT
                 </TableCell>
                 <TableCell className="text-blue-400 uppercase font-medium">
                   {payment.month}
@@ -93,7 +96,10 @@ export default function PayrollPage() {
                     <Button
                       size="xs"
                       color="success"
-                      onClick={() => handlePay(payment._id)}
+                      onClick={() => {
+                        setSelectedEmployee(payment);
+                        setIsOpen(true);
+                      }}
                       disabled={isPending}
                       className="text-green-600 border border-green-500 hover:bg-green-50"
                     >
@@ -106,6 +112,9 @@ export default function PayrollPage() {
           })}
         </TableBody>
       </Table>
+      {isOpen && (
+        <Checkout setIsOpen={setIsOpen} selectedEmployee={selectedEmployee} refetch={refetch} />
+      )}
     </div>
   );
 }

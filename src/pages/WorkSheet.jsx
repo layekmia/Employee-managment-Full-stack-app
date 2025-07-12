@@ -16,6 +16,7 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
+import Spinner from "../components/Dashboard/Spinner";
 
 const tasks = ["Sales", "Support", "Content", "Paper-work"];
 
@@ -135,13 +136,11 @@ export default function WorkSheet() {
 
       {/* Table */}
       {isLoading ? (
-        <div className="flex justify-center items-center py-10">
-          <div className="h-10 w-10 border-4 border-[#4361ee] border-t-transparent rounded-full animate-spin"></div>
-        </div>
+        <Spinner />
       ) : (
         <div className="overflow-x-scroll">
           <Table striped>
-            <TableHead >
+            <TableHead>
               <TableHeadCell className="bg-[#266dfb10]">Task</TableHeadCell>
               <TableHeadCell className="bg-[#266dfb10]">Hours</TableHeadCell>
               <TableHeadCell className="bg-[#266dfb10]">Date</TableHeadCell>
@@ -153,7 +152,9 @@ export default function WorkSheet() {
                   <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {item.task}
                   </TableCell>
-                  <TableCell>{item.hours}</TableCell>
+                  <TableCell className="font-medium text-green-600">
+                    {item.hours}h
+                  </TableCell>
                   <TableCell>{item.date.slice(0, 10)}</TableCell>
                   <TableCell className="flex items-center gap-3">
                     <button

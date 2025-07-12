@@ -17,6 +17,7 @@ export default function PayModal({ user, onClose, refetch }) {
       year: new Date().getFullYear(),
     },
   });
+  console.log(user)
 
   const [loading, setLoading] = useState(false);
 
@@ -27,6 +28,7 @@ export default function PayModal({ user, onClose, refetch }) {
       employeeId: user._id,
       employeeName: user.name,
       employeeEmail: user.email,
+      designation: user.designation,
       salary: data.amount,
       bankAccount: user.bank_account_no,
       month: data.month.toLowerCase(),

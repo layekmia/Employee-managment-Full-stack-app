@@ -8,9 +8,6 @@ import { TbReportMoney } from "react-icons/tb";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { MdOutlineAttachMoney } from "react-icons/md";
 
-
-
-
 // Example icon mapping (you can improve it)
 const icons = {
   overview: <MdDashboard />,
@@ -79,7 +76,7 @@ export default function SidebarMenu({ userRole, setSidebarToggle }) {
   return (
     <nav className="flex flex-col mt-3">
       {menu
-        // .filter((item) => item.role.includes(userRole))
+        .filter((item) => item.role.includes(userRole))
         .map((item) => (
           <NavLink
             onClick={() => setSidebarToggle(false)}

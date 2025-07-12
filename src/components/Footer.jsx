@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import { FaRegPaperPlane } from "react-icons/fa";
 import SocialMediaLinks from "./SocialMediaLinks";
 import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#2B405A] text-gray-300 py-10 px-6">
+    <footer className="bg-[#2B405A] text-gray-300 py-10 px-6 relative z-50">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 justify-center md:justify-between items-center">
         {/* Left Side */}
         <div className="space-y-8 flex items-center md:items-start flex-col font-secondary">

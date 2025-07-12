@@ -16,6 +16,8 @@ import Settings from "../pages/Settings";
 import SlugDetails from "../components/Dashboard/SlugDetails";
 import AdminEmployeeManagement from "../pages/AdminEmployeeManagement";
 import PrivateRoute from "../components/PrivateRoute";
+import DashboardPrivateRoute from "../components/Dashboard/PrivateRoute";
+import Unauthorized from "../pages/Unauthorized";
 
 const router = createBrowserRouter([
   {
@@ -33,13 +35,62 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="/dashboard/overview" replace /> },
       { path: "/dashboard/overview", element: <Overview /> },
-      { path: "/dashboard/work-sheet", element: <WorkSheet /> },
-      { path: "/dashboard/payment-history", element: <PaymentHistory /> },
-      { path: "/dashboard/employee-list", element: <EmployeeList /> },
-      { path: "/dashboard/employee-list/:id", element: <SlugDetails /> },
-      { path: "/dashboard/progress", element: <Progress /> },
-      { path: "/dashboard/all-employee", element: <AdminEmployeeManagement /> },
-      { path: "/dashboard/payroll", element: <Payroll /> },
+      {
+        path: "/dashboard/work-sheet",
+        element: (
+          <DashboardPrivateRoute allowedRoles={["employee"]}>
+            <WorkSheet />
+          </DashboardPrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment-history",
+        element: (
+          <DashboardPrivateRoute allowedRoles={["employee"]}>
+            <PaymentHistory />
+          </DashboardPrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/employee-list",
+        element: (
+          <DashboardPrivateRoute allowedRoles={["hr"]}>
+            <EmployeeList />
+          </DashboardPrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/employee-list/:id",
+        element: (
+          <DashboardPrivateRoute allowedRoles={["hr"]}>
+            <SlugDetails />
+          </DashboardPrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/progress",
+        element: (
+          <DashboardPrivateRoute allowedRoles={["hr"]}>
+            <Progress />
+          </DashboardPrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/all-employee",
+        element: (
+          <DashboardPrivateRoute allowedRoles={["admin"]}>
+            <AdminEmployeeManagement />
+          </DashboardPrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payroll",
+        element: (
+          <DashboardPrivateRoute allowedRoles={["admin"]}>
+            <Payroll />
+          </DashboardPrivateRoute>
+        ),
+      },
       { path: "/dashboard/settings", element: <Settings /> },
     ],
   },
@@ -65,6 +116,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "/unauthorized", element: <Unauthorized /> },
 ]);
 
 export default router;

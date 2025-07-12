@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import auth from "../config/firebase";
 import Spinner from "../components/Spinner";
+import axiosInstance from "../utils/axiosInstance";
 
 export const AuthContext = createContext();
 
@@ -23,12 +24,12 @@ export default function AuthContextProvider({ children }) {
   };
 
   const signOutUser = async () => {
-    console.log("logout")
+    console.log("logout");
     await signOut(auth);
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         const {
           displayName: name,
@@ -37,7 +38,15 @@ export default function AuthContextProvider({ children }) {
           uid,
           accessToken: token,
         } = currentUser;
-        setUser({ name, email, image, uid, token });
+
+        try {
+          const res = await axiosInstance.get(`/user/${uid}`);
+          const role = res.data.role;
+          setUser({ name, email, image, uid, token, role });
+        } catch (error) {
+          console.log(" Failed to fetch user role");
+          setUser(null);
+        }
       } else {
         setUser(null);
       }
@@ -45,7 +54,8 @@ export default function AuthContextProvider({ children }) {
     });
     return () => unsubscribe();
   }, []);
-  console.log(user);
+
+  console.log(user)
 
   if (isAuthChecking) return <Spinner />;
 

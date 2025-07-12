@@ -15,6 +15,7 @@ import earadaLogo from "./company-logos/earada-logo.jpg";
 import horilux from "./company-logos/hortiluxlogo.png";
 import kuehnenagellogo from "./company-logos/kuehnenagellogo.png";
 import uipath from "./company-logos/uipath.png";
+import verifiedIcon from './verifyicon.png';
 
 const assets = {
   logo,
@@ -27,6 +28,7 @@ const assets = {
   hremployee,
   attendance,
   payroll,
+  verifiedIcon
 };
 
 const logos = [barclays, dm, earadaLogo, horilux, kuehnenagellogo, uipath];

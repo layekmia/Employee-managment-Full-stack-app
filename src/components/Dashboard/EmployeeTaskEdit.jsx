@@ -21,33 +21,32 @@ export default function EditTaskModal({ isOpen, onClose, taskData, onSubmit }) {
     }
   }, [taskData, reset]);
 
-const handleFormSubmit = async (data) => {
-  const updatedData = {
-    ...data,
-    date: new Date(data.date).toISOString(),
+  const handleFormSubmit = async (data) => {
+    const updatedData = {
+      ...data,
+      date: new Date(data.date).toISOString(),
+    };
+
+    setIsUpdating(true);
+    try {
+      await onSubmit(taskData._id, updatedData);
+      toast.success("Successfully updated");
+      onClose();
+      reset();
+    } catch (error) {
+      console.error(error);
+      toast.error("Error updating task");
+    } finally {
+      setIsUpdating(false);
+    }
   };
-
-  setIsUpdating(true);
-  try {
-    await onSubmit(taskData._id, updatedData);
-    toast.success("Successfully updated");
-    onClose();
-    reset();
-  } catch (error) {
-    console.error(error);
-    toast.error("Error updating task");
-  } finally {
-    setIsUpdating(false);
-  }
-};
-
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="fixed inset-0 z-50">
       <div aria-hidden="true" />
       <div className="flex items-center bg-black/30 justify-center min-h-screen px-4">
-        <Dialog.Panel className="w-full max-w-md bg-white rounded-lg p-6 space-y-4 shadow-lg">
-          <Dialog.Title className="text-xl font-semibold text-gray-800">
+        <Dialog.Panel className="w-full max-w-md bg-white rounded p-6 space-y-4 shadow-lg">
+          <Dialog.Title className="text-xl font-semibold text-gray-800 font-secondary">
             Edit Task
           </Dialog.Title>
 

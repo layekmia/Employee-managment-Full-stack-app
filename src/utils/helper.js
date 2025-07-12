@@ -13,7 +13,7 @@ const dashboardRouteTitles = {
   "/dashboard/payment-history": "Payment History",
   "/dashboard/employee-list": "Employee List",
   "/dashboard/progress": "Progress",
-  "/dashboard/all-employee": "All Employee",
+  "/dashboard/all-employee": "Employee Management",
   "/dashboard/payroll": "Payroll",
   "/dashboard/settings": "Settings",
 };

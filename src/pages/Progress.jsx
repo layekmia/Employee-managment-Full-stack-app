@@ -3,6 +3,14 @@ import { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { Menu } from "@headlessui/react";
 import { ChevronDownIcon } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+} from "flowbite-react";
 
 const months = [
   "January",
@@ -33,6 +41,8 @@ export default function Progress() {
     },
   });
 
+  console.log(employees);
+
   const { data: workRecords = [], isLoading } = useQuery({
     queryKey: ["workRecords", selectedEmployee, selectedMonth],
     queryFn: async () => {
@@ -46,27 +56,28 @@ export default function Progress() {
     },
   });
 
-  console.log(workRecords)
-
   return (
-    <div className="p-5">
-      <h2 className="text-xl font-bold mb-4">Work Records</h2>
+    <div className="">
+      <h2 className="text-xl font-bold mb-4 text-gray-700 font-secondary">
+        See Work Records
+      </h2>
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         {/* Employee Filter */}
         <div>
           <Menu as="div" className="relative inline-block text-left">
-            <Menu.Button className="inline-flex justify-between w-48 px-4 py-2 bg-gray-200 rounded">
+            <Menu.Button className="inline-flex items-center justify-between w-48 px-4 py-2 bg-white border-2 border-gray-100 rounded focus:outline-none">
               {selectedEmployee ? selectedEmployee.name : "All Employees"}
-              <ChevronDownIcon className="ml-2 w-4 h-4" />
+              <ChevronDownIcon className="ml-2 w-5 h-4" />
             </Menu.Button>
-            <Menu.Items className="absolute mt-2 w-48 bg-white rounded shadow z-10">
+
+            <Menu.Items className="absolute mt-1 w-48 bg-white shadow-lg rounded z-50 max-h-60 overflow-y-auto focus:outline-none">
               <Menu.Item>
                 {({ active }) => (
                   <button
                     className={`w-full px-4 py-2 text-left ${
-                      active && "bg-gray-100"
+                      active ? "bg-gray-100" : ""
                     }`}
                     onClick={() => setSelectedEmployee(null)}
                   >
@@ -79,7 +90,7 @@ export default function Progress() {
                   {({ active }) => (
                     <button
                       className={`w-full px-4 py-2 text-left ${
-                        active && "bg-gray-100"
+                        active ? "bg-gray-100" : ""
                       }`}
                       onClick={() => setSelectedEmployee(emp)}
                     >
@@ -95,17 +106,18 @@ export default function Progress() {
         {/* Month Filter */}
         <div>
           <Menu as="div" className="relative inline-block text-left">
-            <Menu.Button className="inline-flex justify-between w-48 px-4 py-2 bg-gray-200 rounded">
+            <Menu.Button className="inline-flex items-center justify-between w-48 px-4 py-2 bg-white border-2 border-gray-200 rounded focus:outline-none">
               {selectedMonth}
-              <ChevronDownIcon className="ml-2 w-4 h-4" />
+              <ChevronDownIcon className="ml-2 w-5 h-4" />
             </Menu.Button>
-            <Menu.Items className="absolute mt-2 w-48 bg-white rounded shadow z-10">
+
+            <Menu.Items className="absolute mt-1 w-48 bg-white shadow-lg rounded z-50 max-h-60 overflow-y-auto focus:outline-none">
               {months.map((month) => (
                 <Menu.Item key={month}>
                   {({ active }) => (
                     <button
                       className={`w-full px-4 py-2 text-left ${
-                        active && "bg-gray-100"
+                        active ? "bg-gray-100" : ""
                       }`}
                       onClick={() => setSelectedMonth(month)}
                     >
@@ -124,36 +136,42 @@ export default function Progress() {
         {isLoading ? (
           <div className="text-center py-10">Loading...</div>
         ) : (
-          <table className="min-w-full bg-white rounded-lg shadow text-sm">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="px-4 py-3 text-left">Employee</th>
-                <th className="px-4 py-3 text-left">Task</th>
-                <th className="px-4 py-3 text-left">Hours Worked</th>
-                <th className="px-4 py-3 text-left">Date</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {workRecords.length === 0 ? (
-                <tr>
-                  <td colSpan="4" className="text-center py-4">
-                    No records found.
-                  </td>
-                </tr>
-              ) : (
-                workRecords.map((record) => (
-                  <tr key={record._id} className="hover:bg-gray-50">
-                    <td className="px-4 py-2">{record.employeeName}</td>
-                    <td className="px-4 py-2">{record.task}</td>
-                    <td className="px-4 py-2">{record.hours}</td>
-                    <td className="px-4 py-2">
-                      {new Date(record.date).toLocaleDateString()}
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+          <div className="overflow-x-auto">
+            <Table striped>
+              <TableHead>
+                <TableHeadCell className="bg-blue-50">Employee</TableHeadCell>
+                <TableHeadCell className="bg-blue-50">Task</TableHeadCell>
+                <TableHeadCell className="bg-blue-50">Hours Worked</TableHeadCell>
+                <TableHeadCell className="bg-blue-50">Date</TableHeadCell>
+              </TableHead>
+
+              <TableBody className="divide-y">
+                {workRecords.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan="4" className="text-center py-4">
+                      No records found.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  workRecords.map((record) => (
+                    <TableRow
+                      key={record._id}
+                      className="bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800"
+                    >
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                        {record.employeeName}
+                      </TableCell>
+                      <TableCell>{record.task}</TableCell>
+                      <TableCell>{record.hours}</TableCell>
+                      <TableCell>
+                        {new Date(record.date).toLocaleDateString()}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
         )}
       </div>
     </div>

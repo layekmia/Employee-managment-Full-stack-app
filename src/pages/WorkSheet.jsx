@@ -8,6 +8,14 @@ import axiosInstance from "../utils/axiosInstance";
 import EditTaskModal from "../components/Dashboard/EmployeeTaskEdit";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+} from "flowbite-react";
 
 const tasks = ["Sales", "Support", "Content", "Paper-work"];
 
@@ -43,7 +51,7 @@ export default function WorkSheet() {
       date: selectedDate.toISOString(),
       month: selectedMonth,
     };
-    console.log(newEntry)
+    console.log(newEntry);
     reset();
     setSelectedDate(new Date());
 
@@ -94,7 +102,7 @@ export default function WorkSheet() {
       >
         <select
           {...register("task", { required: true })}
-          className="border px-4 py-2 rounded w-full lg:w-auto"
+          className="border px-4 py-[6px] rounded w-full lg:w-auto"
         >
           <option value="">Select Task</option>
           {tasks.map((task) => (
@@ -108,20 +116,20 @@ export default function WorkSheet() {
           {...register("hours", { required: true })}
           type="number"
           placeholder="Hours Worked"
-          className="border px-4 py-2 rounded w-full lg:w-auto"
+          className="border px-4 py-[6px] rounded w-full lg:w-auto"
         />
 
         <DatePicker
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
-          className="border px-4 py-2 rounded w-full lg:w-auto"
+          className="border px-4 py-[6px] rounded w-full lg:w-auto"
         />
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+          className="bg-[#3b82f6] text-white px-6 py-[6px] font-secondary font-medium rounded hover:bg-blue-700 transition"
         >
-          Add
+          Submit
         </button>
       </form>
 
@@ -131,47 +139,40 @@ export default function WorkSheet() {
           <div className="h-10 w-10 border-4 border-[#4361ee] border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="text-left py-2 px-4 border">Task</th>
-                <th className="text-left py-2 px-4 border">Hours</th>
-                <th className="text-left py-2 px-4 border">Date</th>
-                <th className="text-left py-2 px-4 border">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
+        <div className="overflow-x-scroll">
+          <Table striped>
+            <TableHead >
+              <TableHeadCell className="bg-[#266dfb10]">Task</TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">Hours</TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">Date</TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">Actions</TableHeadCell>
+            </TableHead>
+            <TableBody className="divide-y">
               {workData.map((item) => (
-                <tr key={item.id} className="hover:bg-gray-50">
-                  <td className="py-2 px-4 border">{item.task}</td>
-                  <td className="py-2 px-4 border">{item.hours}</td>
-                  <td className="py-2 px-4 border">{item.date.slice(0, 10)}</td>
-                  <td className="py-2 px-4 border space-x-2">
+                <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                  <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {item.task}
+                  </TableCell>
+                  <TableCell>{item.hours}</TableCell>
+                  <TableCell>{item.date.slice(0, 10)}</TableCell>
+                  <TableCell className="flex items-center gap-3">
                     <button
                       onClick={() => handleEdit(item)}
-                      className="text-blue-500 hover:underline"
+                      className="text-blue-700 font-secondary font-medium hover:underline"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(item._id)}
-                      className="text-red-500 hover:underline"
+                      className="text-red-500 font-secondary font-medium hover:underline"
                     >
                       Delete
                     </button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-              {workData.length === 0 && (
-                <tr>
-                  <td colSpan="4" className="text-center py-4">
-                    No work data found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       )}
 

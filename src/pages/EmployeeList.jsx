@@ -4,39 +4,38 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import PayModal from "../components/Dashboard/PayModal";
 import { useNavigate } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+} from "flowbite-react";
+import { RxCross2 } from "react-icons/rx";
+import { assets } from "../assets/assets";
 
 export default function EmployeeList() {
-  const {
-    data: employees = [],
-    isLoading: employeeLoading,
-  } = useQuery({
-    queryKey: ["employees"],
-    queryFn: async () => {
-      const res = await axiosInstance.get("/employees");
-      return res.data;
-    },
-  });
-
-  const {
-    data: monthlyPayments = [],
-    isLoading: paymentLoading, refetch
-  } = useQuery({
-    queryKey: ["monthlyPayments"],
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["employees-payments"],
     queryFn: async () => {
       const today = new Date();
-      const month = today.toLocaleString("default", { month: "long" }); // July
+      const month = today.toLocaleString("default", { month: "long" });
       const year = today.getFullYear();
 
       const res = await axiosInstance.get(
-        `/payments/monthly?month=${month}&year=${year}`
+        `/hr/employees-with-payments?month=${month}&year=${year}`
       );
       return res.data;
     },
   });
 
+  const employees = data?.employees;
+  const payments = data?.payments;
+
   const [openPayModal, setOpenPayModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleVerify = async (user) => {
     try {
@@ -48,9 +47,10 @@ export default function EmployeeList() {
       } else {
         toast.success(`now MR ${user.name} is verified`);
       }
-      refetch();
     } catch (error) {
       toast.error("Employee verify to failed", error.message);
+    } finally {
+      refetch();
     }
   };
 
@@ -62,70 +62,83 @@ export default function EmployeeList() {
     setOpenPayModal(false);
   };
 
-  if (employeeLoading || paymentLoading)
-    return <div className="text-center p-5">Loading...</div>;
+  if (isLoading) return <div className="text-center p-5">Loading...</div>;
 
   return (
-    <div className="p-5">
-      <h2 className="text-xl font-bold mb-4">Employee List</h2>
+    <div>
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-lg shadow overflow-hidden">
-          <thead className="bg-gray-100 text-left text-sm font-semibold text-gray-700">
-            <tr>
-              <th className="px-4 py-3">Name</th>
-              <th className="px-4 py-3">Email</th>
-              <th className="px-4 py-3 text-center">Verified</th>
-              <th className="px-4 py-3">Bank Account</th>
-              <th className="px-4 py-3">Salary</th>
-              <th className="px-4 py-3 text-center">Payment</th>
-              <th className="px-4 py-3 text-center">Details</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200 text-sm">
+        <Table striped>
+          <TableHead>
+            <TableHeadCell className="bg-[#266dfb10]">Name</TableHeadCell>
+            <TableHeadCell className="bg-[#266dfb10]">Email</TableHeadCell>
+            <TableHeadCell className="bg-[#266dfb10]">Verified</TableHeadCell>
+            <TableHeadCell className="bg-[#266dfb10]">Bank Account</TableHeadCell>
+            <TableHeadCell className="bg-[#266dfb10]">Salary</TableHeadCell>
+            <TableHeadCell className="bg-[#266dfb10]">Payment</TableHeadCell>
+            <TableHeadCell className="bg-[#266dfb10]">Details</TableHeadCell>
+          </TableHead>
+          <TableBody className="divide-y">
             {employees.map((employee, index) => {
-              const isPaid = monthlyPayments.some(
+              const isPaid = payments.some(
                 (payment) => payment.employeeId === employee._id
               );
-
               return (
-                <tr key={index} className="hover:bg-gray-50">
-                  <td className="px-4 py-2">{employee.name}</td>
-                  <td className="px-4 py-2">{employee.email}</td>
-                  <td className="px-4 py-2 text-center">
+                <TableRow
+                  index={index}
+                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                >
+                  <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {employee.name}
+                  </TableCell>
+                  <TableCell>{employee.email}</TableCell>
+                  <TableCell>
                     <button
                       className="text-xl"
                       onClick={() => handleVerify(employee)}
                     >
-                      {employee.isVerified ? "✅" : "❌"}
+                      {employee.isVerified ? (
+                        <img src={assets.checkIcon} />
+                      ) : (
+                        <RxCross2 className="text-red-600 font-bold" />
+                      )}
                     </button>
-                  </td>
-                  <td className="px-4 py-2">
-                    {employee.bank_account_no || "N/A"}
-                  </td>
-                  <td className="px-4 py-2">{employee.salary || "N/A"}</td>
-                  <td className="px-4 py-2 flex items-center justify-center">
+                  </TableCell>
+                  <TableCell>{employee.bank_account_no || "N/A"}</TableCell>
+                  <TableCell>{employee.salary}</TableCell>
+                  <TableCell>
                     <button
                       onClick={() => handlePay(employee)}
                       className={`${
                         isPaid || !employee.isVerified
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-green-500 hover:bg-green-600"
-                      } text-white px-3 py-1 rounded`}
+                          ? "bg-gray-400 text-gray-600 text-sm px-4 py-1.5 rounded-lg cursor-not-allowed"
+                          : "bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-1.5 rounded-lg shadow-sm transition"
+                      } text-white  `}
                       disabled={isPaid || !employee.isVerified}
                     >
-                      {isPaid ? "Paid" : "Pay"}
+                      {isPaid ? "Paid" : `Pay`}
                     </button>
-                  </td>
-                  <td className="px-4 py-2 text-center">
-                    <button onClick={() => navigate(`/dashboard/employee-list/${employee._id}`)} className="py-1 px-3 bg-blue-600 text-white rounded">
+                  </TableCell>
+
+                  <TableCell>
+                    {/* <button
+                      onClick={() =>
+                        navigate(`/dashboard/employee-list/${employee._id}`)
+                      }
+                      className="py-1 px-3 bg-blue-600 text-white rounded"
+                    >
                       Details
-                    </button>
-                  </td>
-                </tr>
+                    </button> */}
+                   <button
+  className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded-full shadow-sm transition"
+>
+  Details
+</button>
+                  </TableCell>
+                </TableRow>
               );
             })}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
       {openPayModal && (
         <PayModal user={selectedUser} onClose={onClose} refetch={refetch} />

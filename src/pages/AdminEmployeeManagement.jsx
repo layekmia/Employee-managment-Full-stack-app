@@ -3,6 +3,16 @@ import { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 import { Dialog } from "@headlessui/react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+} from "flowbite-react";
+
+
 
 export default function AdminEmployeeManagement() {
   const queryClient = useQueryClient();
@@ -57,24 +67,29 @@ export default function AdminEmployeeManagement() {
 
   return (
     <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">Employee Management</h2>
+      <div className="overflow-x-auto">
+      <Table striped>
+        <TableHead>
+          <TableHeadCell>Name</TableHeadCell>
+          <TableHeadCell>Designation</TableHeadCell>
+          <TableHeadCell>Make HR</TableHeadCell>
+          <TableHeadCell>Salary</TableHeadCell>
+          <TableHeadCell>Fire</TableHeadCell>
+        </TableHead>
 
-      <table className="min-w-full bg-white rounded shadow">
-        <thead className="bg-gray-100 text-left text-sm">
-          <tr>
-            <th className="p-3">Name</th>
-            <th className="p-3">Designation</th>
-            <th className="p-3">Make HR</th>
-            <th className="p-3">Salary</th>
-            <th className="p-3">Fire</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y">
+        <TableBody className="divide-y">
           {employees.map((user) => (
-            <tr key={user._id} className="hover:bg-gray-50">
-              <td className="p-3 uppercase">{user.name}</td>
-              <td className="p-3 uppercase">{user.role}</td>
-              <td className="p-3">
+            <TableRow
+              key={user._id}
+              className="hover:bg-gray-50 dark:bg-gray-800"
+            >
+              <TableCell className="uppercase font-medium text-gray-900 dark:text-white">
+                {user.name}
+              </TableCell>
+
+              <TableCell className="uppercase">{user.role}</TableCell>
+
+              <TableCell>
                 {user.role !== "hr" && !user.isFired ? (
                   <button
                     onClick={() => makeHR(user._id)}
@@ -85,33 +100,37 @@ export default function AdminEmployeeManagement() {
                 ) : (
                   "-"
                 )}
-              </td>
-              <td className="p-3">
-                <input
-                  type="number"
-                  className="w-24 border px-2 py-1 rounded"
-                  defaultValue={user.salary}
-                  onChange={(e) =>
-                    setSalaryUpdate({
-                      id: user._id,
-                      value: Number(e.target.value),
-                    })
-                  }
-                />
-                <button
-                  onClick={() => {
-                    if (salaryUpdate.value > user.salary) {
-                      updateSalary(user._id, salaryUpdate.value);
-                    } else {
-                      toast.error("Cannot decrease salary");
+              </TableCell>
+
+              <TableCell>
+                <div className="flex items-center">
+                  <input
+                    type="number"
+                    className="w-24 border px-2 py-1 rounded text-sm"
+                    defaultValue={user.salary}
+                    onChange={(e) =>
+                      setSalaryUpdate({
+                        id: user._id,
+                        value: Number(e.target.value),
+                      })
                     }
-                  }}
-                  className="ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                  Update
-                </button>
-              </td>
-              <td className="p-3">
+                  />
+                  <button
+                    onClick={() => {
+                      if (salaryUpdate.value > user.salary) {
+                        updateSalary(user._id, salaryUpdate.value);
+                      } else {
+                        toast.error("Cannot decrease salary");
+                      }
+                    }}
+                    className="ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  >
+                    Update
+                  </button>
+                </div>
+              </TableCell>
+
+              <TableCell>
                 {user.isFired ? (
                   <span className="text-red-500">Fired</span>
                 ) : (
@@ -124,11 +143,12 @@ export default function AdminEmployeeManagement() {
                     Fire
                   </button>
                 )}
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
+    </div>
 
       {/* 🔥 Fire Confirmation Modal */}
       <Dialog

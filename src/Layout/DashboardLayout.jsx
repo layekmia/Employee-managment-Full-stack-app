@@ -13,25 +13,29 @@ import { useState } from "react";
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
 import { RxCross1 } from "react-icons/rx";
 import useAuth from "../hook/useAuth";
+import useTheme from "../hook/useTheme";
+import { FaMoon } from "react-icons/fa";
+import { IoSunnySharp } from "react-icons/io5";
 
 export default function DashboardLayout() {
   const location = useLocation();
   const [sidebarToggle, setSidebarToggle] = useState(false);
-  const title = dashboardRouteTitles[location.pathname] || "Dashboard"; 
+  const title = dashboardRouteTitles[location.pathname] || "Dashboard";
 
   const { user, signOutUser } = useAuth();
+  const { darkMode, setDarkMode } = useTheme();
 
   return (
     <div className="flex min-h-screen">
       <aside
-        className={`w-[200px] bg-white fixed top-0 bottom-0 shadow-md md:shadow-none transition-transform duration-300 ${`${
+        className={`w-[200px] bg-white fixed top-0 bottom-0 shadow-md md:shadow-none z-50 transition-transform duration-300 ${`${
           sidebarToggle ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}`}
       >
-        <div className="h-14 flex items-center border-b px-4 bg-[#fcfcfc] relative">
+        <div className="h-14 flex items-center border-b px-4 bg-white relative">
           <Logo />
           <button
-            className="absolute top-2 right-3 font-bold text-gray-600 md:hidden"
+            className="absolute top-2 text-xs right-3 font-bold text-gray-600 md:hidden"
             onClick={() => setSidebarToggle(false)}
           >
             <RxCross1 />
@@ -39,8 +43,8 @@ export default function DashboardLayout() {
         </div>
         <SidebarMenu userRole="hr" setSidebarToggle={setSidebarToggle} />
       </aside>
-      <div className="bg-gray-50 flex-1 md:ml-[200px] ">
-        <nav className=" flex items-center justify-between h-14 border-b px-5 bg-[#fcfcfc] max-md:w-full md:fixed top-0 md:left-[200px] right-0">
+      <div className="bg-[#fcfcfc] flex-1 md:ml-[200px] ">
+        <nav className=" flex items-center justify-between h-14 border-b px-5 bg-white max-md:w-full md:fixed top-0 md:left-[200px] right-0 z-30">
           <div className="flex items-center gap-2">
             <button
               className="md:hidden"
@@ -52,10 +56,22 @@ export default function DashboardLayout() {
               {title}
             </h2>
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-1">
             <span className="text-2xl text-gray-500 cursor-pointer">
               <IoMdNotifications />
             </span>
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`w-10 h-10 flex items-center justify-center rounded-md  text-gray-500 ${
+                darkMode ? "hover:bg-[#374151]" : "hover:bg-[#f2f2f2]"
+              } transition-all duration-300`}
+            >
+              {darkMode ? (
+                <IoSunnySharp className="text-base" />
+              ) : (
+                <FaMoon className="text-base" />
+              )}
+            </button>
             <Dropdown
               label=""
               dismissOnClick={false}
@@ -84,7 +100,7 @@ export default function DashboardLayout() {
             </Dropdown>
           </div>
         </nav>
-        <main className="min-h-screen p-5 mt-16">
+        <main className="min-h-screen p-5 md:p-8 md:mt-14">
           <Outlet />
         </main>
       </div>

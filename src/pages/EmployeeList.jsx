@@ -11,6 +11,8 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
+  Badge,
+  Button,
 } from "flowbite-react";
 import { RxCross2 } from "react-icons/rx";
 import { assets } from "../assets/assets";
@@ -72,7 +74,9 @@ export default function EmployeeList() {
             <TableHeadCell className="bg-[#266dfb10]">Name</TableHeadCell>
             <TableHeadCell className="bg-[#266dfb10]">Email</TableHeadCell>
             <TableHeadCell className="bg-[#266dfb10]">Verified</TableHeadCell>
-            <TableHeadCell className="bg-[#266dfb10]">Bank Account</TableHeadCell>
+            <TableHeadCell className="bg-[#266dfb10]">
+              Bank Account
+            </TableHeadCell>
             <TableHeadCell className="bg-[#266dfb10]">Salary</TableHeadCell>
             <TableHeadCell className="bg-[#266dfb10]">Payment</TableHeadCell>
             <TableHeadCell className="bg-[#266dfb10]">Details</TableHeadCell>
@@ -106,33 +110,27 @@ export default function EmployeeList() {
                   <TableCell>{employee.bank_account_no || "N/A"}</TableCell>
                   <TableCell>{employee.salary}</TableCell>
                   <TableCell>
-                    <button
-                      onClick={() => handlePay(employee)}
-                      className={`${
-                        isPaid || !employee.isVerified
-                          ? "bg-gray-400 text-gray-600 text-sm px-4 py-1.5 rounded-lg cursor-not-allowed"
-                          : "bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-1.5 rounded-lg shadow-sm transition"
-                      } text-white  `}
-                      disabled={isPaid || !employee.isVerified}
-                    >
-                      {isPaid ? "Paid" : `Pay`}
-                    </button>
+                    {isPaid ? (
+                      <Badge color="success" className="w-fit">
+                        Created
+                      </Badge>
+                    ) : (
+                      <Button
+                        size="xs"
+                        color="success"
+                        onClick={() => handlePay(employee)}
+                        disabled={!employee.isVerified}
+                        className="text-green-600 border border-green-500 hover:bg-green-50"
+                      >
+                        Make Request
+                      </Button>
+                    )}
                   </TableCell>
 
                   <TableCell>
-                    {/* <button
-                      onClick={() =>
-                        navigate(`/dashboard/employee-list/${employee._id}`)
-                      }
-                      className="py-1 px-3 bg-blue-600 text-white rounded"
-                    >
+                    <button className="text-blue-700 font-secondary font-medium hover:underline">
                       Details
-                    </button> */}
-                   <button
-  className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded-full shadow-sm transition"
->
-  Details
-</button>
+                    </button>
                   </TableCell>
                 </TableRow>
               );

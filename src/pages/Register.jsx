@@ -17,6 +17,7 @@ export default function Register() {
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -24,11 +25,14 @@ export default function Register() {
   const [isImageUpload, setisImageUpload] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const checkRole = watch("role");
 
   const { createUser } = useAuth();
 
   const onSubmit = async (data) => {
     const { email, password, name, image } = data;
+
+    if (!image) return toast.error("Image is required");
 
     setLoading(true);
     try {
@@ -48,7 +52,7 @@ export default function Register() {
         email: data.email,
         role: data.role,
         uid: user.uid,
-        isVerified: false,
+        isVerified: checkRole === "hr" ? true : false,
         isFired: false,
         bank_account_no: data.bank_account_no,
         designation: data.designation,
@@ -70,6 +74,10 @@ export default function Register() {
       );
       toast.success("Register successfully");
     } catch (err) {
+      if (auth.currentUser) {
+        await auth.currentUser.delete();
+      }
+
       switch (err.code) {
         case "auth/email-already-in-use":
           toast.error("This email is already in use.");
@@ -87,6 +95,7 @@ export default function Register() {
       }
     } finally {
       setLoading(false);
+      reset();
     }
   };
 
@@ -122,7 +131,7 @@ export default function Register() {
           Join WorkSync as an Employee or HR
         </h2>
       </div>
-      <div className="max-w-md mx-auto p-5 sm:p-8 rounded border">
+      <div className="w-full max-w-md mx-auto p-5 sm:p-8 rounded border">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full  bg-white  space-y-4"

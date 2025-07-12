@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
@@ -11,8 +11,6 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
-
-
 
 export default function AdminEmployeeManagement() {
   const queryClient = useQueryClient();
@@ -68,87 +66,87 @@ export default function AdminEmployeeManagement() {
   return (
     <div className="p-6">
       <div className="overflow-x-auto">
-      <Table striped>
-        <TableHead>
-          <TableHeadCell>Name</TableHeadCell>
-          <TableHeadCell>Designation</TableHeadCell>
-          <TableHeadCell>Make HR</TableHeadCell>
-          <TableHeadCell>Salary</TableHeadCell>
-          <TableHeadCell>Fire</TableHeadCell>
-        </TableHead>
+        <Table striped>
+          <TableHead>
+            <TableHeadCell className="bg-blue-50">Name</TableHeadCell>
+            <TableHeadCell className="bg-blue-50">Designation</TableHeadCell>
+            <TableHeadCell className="bg-blue-50">Make HR</TableHeadCell>
+            <TableHeadCell className="bg-blue-50">Salary</TableHeadCell>
+            <TableHeadCell className="bg-blue-50">Fire</TableHeadCell>
+          </TableHead>
 
-        <TableBody className="divide-y">
-          {employees.map((user) => (
-            <TableRow
-              key={user._id}
-              className="hover:bg-gray-50 dark:bg-gray-800"
-            >
-              <TableCell className="uppercase font-medium text-gray-900 dark:text-white">
-                {user.name}
-              </TableCell>
+          <TableBody className="divide-y">
+            {employees.map((user) => (
+              <TableRow
+                key={user._id}
+                className="hover:bg-gray-50 dark:bg-gray-800"
+              >
+                <TableCell className="uppercase font-medium text-gray-900 dark:text-white">
+                  {user.name}
+                </TableCell>
 
-              <TableCell className="uppercase">{user.role}</TableCell>
+                <TableCell className="uppercase">{user.role}</TableCell>
 
-              <TableCell>
-                {user.role !== "hr" && !user.isFired ? (
-                  <button
-                    onClick={() => makeHR(user._id)}
-                    className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-                  >
-                    Make HR
-                  </button>
-                ) : (
-                  "-"
-                )}
-              </TableCell>
+                <TableCell>
+                  {user.role !== "hr" && !user.isFired ? (
+                    <button
+                      onClick={() => makeHR(user._id)}
+                      className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                    >
+                      Make HR
+                    </button>
+                  ) : (
+                    "-"
+                  )}
+                </TableCell>
 
-              <TableCell>
-                <div className="flex items-center">
-                  <input
-                    type="number"
-                    className="w-24 border px-2 py-1 rounded text-sm"
-                    defaultValue={user.salary}
-                    onChange={(e) =>
-                      setSalaryUpdate({
-                        id: user._id,
-                        value: Number(e.target.value),
-                      })
-                    }
-                  />
-                  <button
-                    onClick={() => {
-                      if (salaryUpdate.value > user.salary) {
-                        updateSalary(user._id, salaryUpdate.value);
-                      } else {
-                        toast.error("Cannot decrease salary");
+                <TableCell>
+                  <div className="flex items-center">
+                    <input
+                      type="number"
+                      className="w-24 border px-2 py-1 rounded text-sm"
+                      defaultValue={user.salary}
+                      onChange={(e) =>
+                        setSalaryUpdate({
+                          id: user._id,
+                          value: Number(e.target.value),
+                        })
                       }
-                    }}
-                    className="ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                  >
-                    Update
-                  </button>
-                </div>
-              </TableCell>
+                    />
+                    <button
+                      onClick={() => {
+                        if (salaryUpdate.value > user.salary) {
+                          updateSalary(user._id, salaryUpdate.value);
+                        } else {
+                          toast.error("Cannot decrease salary");
+                        }
+                      }}
+                      className="ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                      Update
+                    </button>
+                  </div>
+                </TableCell>
 
-              <TableCell>
-                {user.isFired ? (
-                  <span className="text-red-500">Fired</span>
-                ) : (
-                  <button
-                    onClick={() =>
-                      setFireModal({ isOpen: true, userId: user._id })
-                    }
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                  >
-                    Fire
-                  </button>
-                )}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+                <TableCell>
+                  {user.isFired ? (
+                    <span className="text-red-500">Fired</span>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        setFireModal({ isOpen: true, userId: user._id })
+                      }
+                      className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                    >
+                      Fire
+                    </button>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
 
       {/* 🔥 Fire Confirmation Modal */}
       <Dialog

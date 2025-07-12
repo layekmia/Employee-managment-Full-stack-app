@@ -1,6 +1,16 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+  Badge,
+  Button,
+} from "flowbite-react";
 
 export default function PayrollPage() {
   const queryClient = useQueryClient();
@@ -32,42 +42,70 @@ export default function PayrollPage() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="p-5">
-      <h2 className="text-xl font-bold mb-4">Payroll Management</h2>
-      <table className="min-w-full bg-white rounded shadow">
-        <thead className="bg-gray-100">
-          <tr>
-            <th>Name</th>
-            <th>Salary</th>
-            <th>Month</th>
-            <th>Year</th>
-            <th>Payment Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {payments.map((payment) => (
-            <tr key={payment._id} className="hover:bg-gray-50">
-              <td>{payment.employeeName}</td>
-              <td>${payment.salary}</td>
-              <td>{payment.month}</td>
-              <td>{payment.year}</td>
-              <td>{payment.paymentDate ? new Date(payment.paymentDate).toLocaleDateString() : "Not Paid"}</td>
-              <td>
-                <button
-                  onClick={() => handlePay(payment._id)}
-                  disabled={payment.paymentStatus === "Paid"}
-                  className={`px-3 py-1 rounded ${
-                    payment.paymentStatus === "Paid" ? "bg-gray-400" : "bg-green-600 hover:bg-green-700 text-white"
+    <div className="overflow-x-auto rounded-sm shadow">
+      <Table hoverable striped>
+        <TableHead>
+          <TableHeadCell className="bg-blue-50">Name</TableHeadCell>
+          <TableHeadCell className="bg-blue-50">Salary</TableHeadCell>
+          <TableHeadCell className="bg-blue-50">Month</TableHeadCell>
+          <TableHeadCell className="bg-blue-50">Year</TableHeadCell>
+          <TableHeadCell className="bg-blue-50">Payment Date</TableHeadCell>
+          <TableHeadCell className="bg-blue-50">Status</TableHeadCell>
+        </TableHead>
+
+        <TableBody>
+          {payments.map((payment) => {
+            const isPaid = payment.paymentStatus === "Paid";
+            const paymentDate = payment.paymentDate
+              ? new Date(payment.paymentDate).toLocaleDateString()
+              : "Not Paid";
+
+            return (
+              <TableRow
+                key={payment._id}
+                className="bg-white hover:bg-gray-50 dark:bg-gray-800"
+              >
+                <TableCell className="font-medium text-gray-900 dark:text-white">
+                  {payment.employeeName}
+                </TableCell>
+
+                <TableCell className="text-green-600 font-semibold">
+                  ${payment.salary}
+                </TableCell>
+                <TableCell className="text-blue-400 uppercase font-medium">
+                  {payment.month}
+                </TableCell>
+                <TableCell>{payment.year}</TableCell>
+                <TableCell
+                  className={`${
+                    paymentDate === "Not Paid" && "text-orange-500"
                   }`}
                 >
-                  {payment.paymentStatus === "Paid" ? "Paid" : isPending ? "Paying..." : "Pay"}
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  {paymentDate}
+                </TableCell>
+
+                <TableCell>
+                  {isPaid ? (
+                    <Badge color="success" className="w-fit">
+                      Paid
+                    </Badge>
+                  ) : (
+                    <Button
+                      size="xs"
+                      color="success"
+                      onClick={() => handlePay(payment._id)}
+                      disabled={isPending}
+                      className="text-green-600 border border-green-500 hover:bg-green-50"
+                    >
+                      {isPending ? "Paying..." : "Pay"}
+                    </Button>
+                  )}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </div>
   );
 }

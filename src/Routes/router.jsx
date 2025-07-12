@@ -15,6 +15,7 @@ import Payroll from "../pages/Payroll";
 import Settings from "../pages/Settings";
 import SlugDetails from "../components/Dashboard/SlugDetails";
 import AdminEmployeeManagement from "../pages/AdminEmployeeManagement";
+import PrivateRoute from "../components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,18 +25,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       { index: true, element: <Navigate to="/dashboard/overview" replace /> },
       { path: "/dashboard/overview", element: <Overview /> },
-      {path: '/dashboard/work-sheet', element: <WorkSheet/>},
-      {path: '/dashboard/payment-history', element: <PaymentHistory/>},
-      {path: '/dashboard/employee-list', element: <EmployeeList/>},
-      {path: '/dashboard/employee-list/:id', element: <SlugDetails/>},
-      {path: '/dashboard/progress', element: <Progress/>},
-      {path: '/dashboard/all-employee', element: <AdminEmployeeManagement/>},
-      {path: '/dashboard/payroll', element: <Payroll/>},
-      {path: '/dashboard/settings', element: <Settings/>},
+      { path: "/dashboard/work-sheet", element: <WorkSheet /> },
+      { path: "/dashboard/payment-history", element: <PaymentHistory /> },
+      { path: "/dashboard/employee-list", element: <EmployeeList /> },
+      { path: "/dashboard/employee-list/:id", element: <SlugDetails /> },
+      { path: "/dashboard/progress", element: <Progress /> },
+      { path: "/dashboard/all-employee", element: <AdminEmployeeManagement /> },
+      { path: "/dashboard/payroll", element: <Payroll /> },
+      { path: "/dashboard/settings", element: <Settings /> },
     ],
   },
   {
@@ -44,14 +49,18 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/auth/register",
-        element: <Register />,
+        element: (
+          <PrivateAuth>
+            <Register />
+          </PrivateAuth>
+        ),
       },
       {
         path: "/auth/login",
         element: (
-          // <PrivateAuth>
-          <Login />
-          // </PrivateAuth>
+          <PrivateAuth>
+            <Login />
+          </PrivateAuth>
         ),
       },
     ],

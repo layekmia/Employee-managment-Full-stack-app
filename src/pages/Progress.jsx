@@ -148,7 +148,7 @@ export default function Progress() {
               <TableBody className="divide-y">
                 {workRecords.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan="4" className="text-center py-4">
+                    <TableCell colSpan="4" className="text-center py-4 text-base font-semibold font-secondary">
                       No records found.
                     </TableCell>
                   </TableRow>
@@ -161,9 +161,9 @@ export default function Progress() {
                       <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                         {record.employeeName}
                       </TableCell>
-                      <TableCell>{record.task}</TableCell>
-                      <TableCell>{record.hours}</TableCell>
-                      <TableCell>
+                      <TableCell className="font-medium font-secondary">{record.task}</TableCell>
+                      <TableCell className="font-medium text-green-600">{record.hours}h</TableCell>
+                      <TableCell className="font-medium">
                         {new Date(record.date).toLocaleDateString()}
                       </TableCell>
                     </TableRow>

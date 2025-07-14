@@ -65,12 +65,12 @@ export default function EmployeeList() {
     setOpenPayModal(false);
   };
 
-  if (isLoading) return <Spinner/>
+  if (isLoading) return <Spinner />;
 
   return (
-    <div className="relative">
-      <div className="overflow-x-auto">
-        <Table striped>
+    <div className="relative mt-10">
+      <div className="overflow-x-auto ">
+        <Table striped className="min-w-[1000px] w-full">
           <TableHead>
             <TableHeadCell className="bg-[#266dfb10]">Name</TableHeadCell>
             <TableHeadCell className="bg-[#266dfb10]">Email</TableHeadCell>
@@ -109,7 +109,9 @@ export default function EmployeeList() {
                     </button>
                   </TableCell>
                   <TableCell>{employee.bank_account_no || "N/A"}</TableCell>
-                  <TableCell className="font-medium text-green-600">{employee.salary} TK</TableCell>
+                  <TableCell className="font-medium text-green-600">
+                    {employee.salary} TK
+                  </TableCell>
                   <TableCell>
                     {isPaid ? (
                       <Badge color="success" className="w-fit">
@@ -121,7 +123,7 @@ export default function EmployeeList() {
                         color="success"
                         onClick={() => handlePay(employee)}
                         disabled={!employee.isVerified}
-                        className="text-green-600 border border-green-500 hover:bg-green-50"
+                        className="text-green-600 border border-green-500 hover:bg-green-50 dark:hover:bg-gray-900 dark:border-gray-400 dark:text-gray-300"
                       >
                         Make Request
                       </Button>
@@ -129,7 +131,12 @@ export default function EmployeeList() {
                   </TableCell>
 
                   <TableCell>
-                    <button onClick={() => navigate(`/dashboard/employee-list/${employee._id}`)} className="text-blue-700 font-secondary font-medium hover:underline">
+                    <button
+                      onClick={() =>
+                        navigate(`/dashboard/employee-list/${employee._id}`)
+                      }
+                      className="text-blue-700 font-secondary font-medium hover:underline"
+                    >
                       Details
                     </button>
                   </TableCell>

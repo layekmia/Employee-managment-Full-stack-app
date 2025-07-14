@@ -2,9 +2,9 @@ import { Navigate } from "react-router-dom";
 import useAuth from "../../hook/useAuth";
 
 export default function DashboardPrivateRoute({ children, allowedRoles }) {
-  const { user } = useAuth();
+//   const { user } = useAuth();
 
-  if (!user) return <Navigate to="/auth/login" />;
-  if (!allowedRoles.includes(user.role)) return <Navigate to="/unauthorized" />;
+//   if (!user) return <Navigate to="/auth/login" />;
+//   if (!allowedRoles.includes(user.role)) return <Navigate to="/unauthorized" />;
   return children;
 }

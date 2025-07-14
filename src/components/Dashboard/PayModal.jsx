@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import { toast } from "react-toastify";
+import { months } from "../../utils/helper";
 
 export default function PayModal({ user, onClose, refetch }) {
   const {
@@ -17,7 +18,7 @@ export default function PayModal({ user, onClose, refetch }) {
       year: new Date().getFullYear(),
     },
   });
-  console.log(user)
+  console.log(user);
 
   const [loading, setLoading] = useState(false);
 
@@ -69,19 +70,26 @@ export default function PayModal({ user, onClose, refetch }) {
             </div>
 
             <div>
-              <label className="text-sm">Month</label>
-              <input
+              <label htmlFor="month" className="text-sm block mb-1">
+                Month
+              </label>
+              <select
                 {...register("month", {
                   required: "Month is required",
-                  pattern: {
-                    value: /^[A-Za-z]+$/,
-                    message: "Please enter a valid month name (letters only)",
-                  },
                 })}
-                type="text"
-                placeholder="e.g., July"
+                id="month"
                 className="w-full border px-3 py-2 rounded focus:outline-none"
-              />
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select a month
+                </option>
+                {months.map((month) => (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                ))}
+              </select>
               {errors.month && (
                 <p className="text-red-500 text-sm">{errors.month.message}</p>
               )}

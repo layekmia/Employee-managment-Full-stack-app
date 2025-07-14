@@ -20,7 +20,7 @@ export default function Login() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      //  Check user existence in my backend
+      //   //  Check user existence in my backend
       const { data: userData } = await axios.get(
         `http://localhost:3000/web/api/users/${data.email}`
       );
@@ -48,7 +48,7 @@ export default function Login() {
       toast.success("successfully login");
     } catch (err) {
       console.error(err);
-      toast.error("Login failed. Please check your credentials.");
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }

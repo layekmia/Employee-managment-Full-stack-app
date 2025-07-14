@@ -76,7 +76,7 @@ export default function SidebarMenu({ userRole, setSidebarToggle }) {
   return (
     <nav className="flex flex-col mt-3">
       {menu
-        .filter((item) => item.role.includes(userRole))
+        // .filter((item) => item.role.includes(userRole))
         .map((item) => (
           <NavLink
             onClick={() => setSidebarToggle(false)}
@@ -86,11 +86,11 @@ export default function SidebarMenu({ userRole, setSidebarToggle }) {
               `flex items-center gap-[6px] px-5 py-3 border-l-4    hover:bg-[#266dfb10] font-secondary  ${
                 isActive
                   ? "bg-[#266dfb10] font-semibold text-[#266dfb]  border-[#266dfb] text-base"
-                  : "border-transparent text-[#333333]"
+                  : "border-transparent text-[#333333] dark:text-white"
               }`
             }
           >
-            <span className="text-base text-gray-500">{icons[item.key]}</span>
+            <span className="text-base text-gray-500 dark:text-gray-200">{icons[item.key]}</span>
             <span className="font-secondary text-[15.5px]">{item.label}</span>
           </NavLink>
         ))}

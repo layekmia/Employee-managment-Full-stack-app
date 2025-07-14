@@ -42,8 +42,10 @@ export default function AuthContextProvider({ children }) {
         try {
           const res = await axiosInstance.get(`/user/${uid}`);
           const role = res.data.role;
-          setUser({ name, email, image, uid, token, role });
+          setUser({ name, email, image, uid, token,role });
+          console.log(res)
         } catch (error) {
+          console.log(error)
           console.log(" Failed to fetch user role");
           setUser(null);
         }
@@ -55,7 +57,6 @@ export default function AuthContextProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
-  console.log(user)
 
   if (isAuthChecking) return <Spinner />;
 

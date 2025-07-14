@@ -33,6 +33,7 @@
     "react-router-dom": "^7.6.3",
     "react-toastify": "^11.0.5",
     "recharts": "^3.1.0",
+    "shadcn": "^2.9.0",
     "sweetalert2": "^11.22.2",
     "swiper": "^11.2.10"
   },

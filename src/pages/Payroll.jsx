@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 import {
@@ -16,7 +16,6 @@ import Checkout from "../components/Dashboard/CheckOut";
 import Spinner from "../components/Dashboard/Spinner";
 
 export default function PayrollPage() {
-  const queryClient = useQueryClient();
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -29,24 +28,14 @@ export default function PayrollPage() {
     },
   });
 
-  const { mutateAsync: paySalary, isPending } = useMutation({
-    mutationFn: async (id) => {
-      const res = await axiosInstance.post(`/payments/pay/${id}`);
-      return res.data;
-    },
-    onSuccess: () => {
-      toast.success("Payment successful!");
-      queryClient.invalidateQueries(["payroll"]);
-    },
-    onError: () => toast.error("Payment failed!"),
-  });
+
 
 
   if (isLoading) return <Spinner/>
 
   return (
-    <div className="overflow-x-auto rounded-sm shadow">
-      <Table hoverable striped>
+    <div className="overflow-x-auto rounded-sm shadow mt-10">
+      <Table hoverable striped className="min-w-[800px] w-full">
         <TableHead>
           <TableHeadCell className="bg-blue-50">Name</TableHeadCell>
           <TableHeadCell className="bg-blue-50">Salary</TableHeadCell>
@@ -100,10 +89,9 @@ export default function PayrollPage() {
                         setSelectedEmployee(payment);
                         setIsOpen(true);
                       }}
-                      disabled={isPending}
                       className="text-green-600 border border-green-500 hover:bg-green-50"
                     >
-                      {isPending ? "Paying..." : "Pay"}
+                      Pay
                     </Button>
                   )}
                 </TableCell>

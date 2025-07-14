@@ -13,3 +13,24 @@
 input{
     @apply focus:outline-none focus:ring-2
 }
+
+/* Optional scrollbar styling */
+::-webkit-scrollbar {
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a0aec0;
+  border-radius: 4px;
+}
+table {
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 6px;
+}

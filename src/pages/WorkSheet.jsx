@@ -17,8 +17,9 @@ import {
   TableRow,
 } from "flowbite-react";
 import Spinner from "../components/Dashboard/Spinner";
+import { tasks } from "../utils/helper";
 
-const tasks = ["Sales", "Support", "Content", "Paper-work"];
+
 
 export default function WorkSheet() {
   const { register, handleSubmit, reset } = useForm();
@@ -44,23 +45,29 @@ export default function WorkSheet() {
     },
   });
 
-  const onSubmit = async (data) => {
-    const newEntry = {
-      employeeName: user.name,
-      task: data.task,
-      hours: Number(data.hours),
-      date: selectedDate.toISOString(),
-      month: selectedMonth,
-    };
-    console.log(newEntry);
+const onSubmit = async (data) => {
+  const newEntry = {
+    employeeName: user.name,
+    task: data.task,
+    hours: Number(data.hours),
+    date: selectedDate.toISOString(),
+    month: selectedMonth,
+  };
+
+  try {
+    await axiosInstance.post("/employee-task", newEntry);
+    toast.success("Task added successfully!");
     reset();
     setSelectedDate(new Date());
-
-    const res = await axiosInstance.post("/employee-task", newEntry);
-    console.log(res.data);
-    console.log(newEntry);
+    
     refetch();
-  };
+  } catch (error) {
+    console.error("Failed to submit task:", error);
+    toast.error(
+      error?.response?.data?.message || "Failed to add task. Try again."
+    );
+  }
+};
 
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
@@ -96,14 +103,14 @@ export default function WorkSheet() {
   };
 
   return (
-    <div className="p-4 w-full">
+    <div className="w-full ">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col lg:flex-row gap-4 mb-8"
       >
         <select
           {...register("task", { required: true })}
-          className="border px-4 py-[6px] rounded w-full lg:w-auto"
+          className="border px-4 py-[6px] rounded w-full lg:w-auto dark:bg-gray-800 dark:text-gray-300 dark:border-gray-500"
         >
           <option value="">Select Task</option>
           {tasks.map((task) => (
@@ -117,18 +124,18 @@ export default function WorkSheet() {
           {...register("hours", { required: true })}
           type="number"
           placeholder="Hours Worked"
-          className="border px-4 py-[6px] rounded w-full lg:w-auto"
+          className="border px-4 py-[6px] rounded w-full lg:w-auto dark:bg-gray-800 dark:border-gray-500"
         />
 
         <DatePicker
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
-          className="border px-4 py-[6px] rounded w-full lg:w-auto"
+          className="border px-4 py-[6px] rounded w-full lg:w-auto dark:bg-gray-800 dark:text-gray-300 dark:border-gray-500"
         />
 
         <button
           type="submit"
-          className="bg-[#3b82f6] text-white px-6 py-[6px] font-secondary font-medium rounded hover:bg-blue-700 transition"
+          className="bg-[#3b82f6] dark:bg-gray-600 text-white px-6 py-[6px] font-secondary font-medium rounded hover:bg-blue-700 transition"
         >
           Submit
         </button>
@@ -139,7 +146,7 @@ export default function WorkSheet() {
         <Spinner />
       ) : (
         <div className="overflow-x-scroll">
-          <Table striped>
+          <Table striped className="min-w-[500px]">
             <TableHead>
               <TableHeadCell className="bg-[#266dfb10]">Task</TableHeadCell>
               <TableHeadCell className="bg-[#266dfb10]">Hours</TableHeadCell>
@@ -147,31 +154,42 @@ export default function WorkSheet() {
               <TableHeadCell className="bg-[#266dfb10]">Actions</TableHeadCell>
             </TableHead>
             <TableBody className="divide-y">
-              {workData.map((item) => (
-                <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                  <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {item.task}
-                  </TableCell>
-                  <TableCell className="font-medium text-green-600">
-                    {item.hours}h
-                  </TableCell>
-                  <TableCell>{item.date.slice(0, 10)}</TableCell>
-                  <TableCell className="flex items-center gap-3">
-                    <button
-                      onClick={() => handleEdit(item)}
-                      className="text-blue-700 font-secondary font-medium hover:underline"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(item._id)}
-                      className="text-red-500 font-secondary font-medium hover:underline"
-                    >
-                      Delete
-                    </button>
+              {workData.length === 0 ? (
+                <TableRow>
+                  <TableCell
+                    colSpan={4} // assuming your table has 4 columns
+                    className="text-center py-4 font-medium text-gray-600 font-secondary"
+                  >
+                    You haven't added any tasks yet.
                   </TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                workData.map((item) => (
+                  <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                    <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                      {item.task}
+                    </TableCell>
+                    <TableCell className="font-medium dark:text-green-400 text-green-600">
+                      {item.hours}h
+                    </TableCell>
+                    <TableCell>{item.date.slice(0, 10)}</TableCell>
+                    <TableCell className="flex items-center gap-3">
+                      <button
+                        onClick={() => handleEdit(item)}
+                        className="text-blue-700 font-secondary font-medium hover:underline"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className="text-red-500 font-secondary font-medium hover:underline"
+                      >
+                        Delete
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </div>

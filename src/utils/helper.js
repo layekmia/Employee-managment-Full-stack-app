@@ -13,7 +13,7 @@ const dashboardRouteTitles = {
   "/dashboard/payment-history": "Payment History",
   "/dashboard/employee-list": "Employee List",
   "/dashboard/progress": "Progress",
-  "/dashboard/all-employee": "Employee Management",
+  "/dashboard/all-employee": "Employees",
   "/dashboard/payroll": "Payroll",
   "/dashboard/settings": "Settings",
 };
@@ -165,6 +165,42 @@ const formatDate = (date) => {
   }).format(date);
 };
 
+const tasks = [
+  "Sales",
+  "Support",
+  "Content",
+  "Paper-work",
+  "Marketing",
+  "Development",
+  "Design",
+  "Meeting",
+  "Research",
+  "Training",
+  "Testing",
+  "Data Entry",
+  "Customer Feedback",
+  "Documentation",
+  "Bug Fixing",
+  "Inventory",
+  "Social Media",
+  "Recruitment",
+  "Planning",
+];
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export {
   generateRandomBankAccount,
@@ -173,4 +209,6 @@ export {
   hrSolutions,
   testimonials,
   formatDate,
+  tasks,
+  months,
 };

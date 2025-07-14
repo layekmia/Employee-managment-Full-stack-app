@@ -42,20 +42,20 @@ export default function SlugDetails() {
           className="w-24 h-24 rounded-full object-cover border-4 border-blue-600"
         />
         <div>
-          <h2 className="text-xl font-semibold text-gray-500 uppercase  font-secondary ">
+          <h2 className="text-xl  dark:text-white font-semibold text-gray-500 uppercase  font-secondary ">
             {employee.name}
           </h2>
-          <p className="text-gray-600 font-secondary font-medium text-sm">
+          <p className="text-gray-600 dark:text-gray-300 font-secondary font-medium text-sm">
             {employee.designation || "Employee"}
           </p>
         </div>
       </div>
 
-      <h3 className="text-xl font-semibold mb-4 text-gray-800 font-secondary">
+      <h3 className="text-xl dark:text-white font-semibold mb-4 text-gray-800 font-secondary">
         Monthly Salary Overview
       </h3>
 
-      <div className="w-full h-[350px] rounded-md shadow-sm p-4 bg-white">
+      <div className="w-full h-[350px] rounded-md shadow-sm p-4 bg-white dark:bg-gray-800">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={chartData}
@@ -93,6 +93,7 @@ export default function SlugDetails() {
               radius={[8, 8, 0, 0]}
               barSize={40}
               name="Salary (TK)"
+              
             />
           </BarChart>
         </ResponsiveContainer>

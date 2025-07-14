@@ -92,12 +92,12 @@ export default function PaymentForm({ setIsOpen, selectedEmployee, refetch }) {
 
   return (
     <div className="w-full flex justify-center px-4">
-      <div className="w-full max-w-sm bg-white rounded-xl shadow-xl mt-10 p-6">
-        <h2 className="text-xl font-bold text-center text-gray-800 mb-6 font-secondary uppercase">
+      <div className="w-full max-w-sm bg-white dark:bg-gray-900 rounded-xl shadow-xl mt-10 p-6">
+        <h2 className="text-xl font-bold text-center text-gray-800 mb-6 font-secondary uppercase dark:text-gray-300">
           Payment Details
         </h2>
-        <div className="bg-gray-50 border border-gray-200 rounded-md p-4 mb-6">
-          <div className="space-y-2 text-sm text-gray-700">
+        <div className="bg-gray-50 border dark:bg-gray-800 dark:border-gray-500 border-gray-200 rounded-md p-4 mb-6">
+          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
             <p>
               <span className="font-semibold mr-2">Name:</span>{" "}
               {selectedEmployee.employeeName}
@@ -115,14 +115,14 @@ export default function PaymentForm({ setIsOpen, selectedEmployee, refetch }) {
               {selectedEmployee.month}
             </p>
             <p>
-              <span className="font-semibold mr-2">Salary:</span> 
+              <span className="font-semibold mr-2">Salary:</span>
               {selectedEmployee.salary} TK
             </p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="border p-3 rounded-md bg-white shadow-inner">
+          <div className="border p-3 rounded-md bg-white dark:bg-gray-900 dark:border-gray-500 shadow-inner">
             <CardElement className="p-2" />
           </div>
 

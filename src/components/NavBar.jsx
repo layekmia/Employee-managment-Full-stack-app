@@ -16,13 +16,14 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   const { user, signOutUser } = useAuth();
+  console.log(user);
 
   return (
-    <header className="shadow-md">
-      <nav className="flex items-center justify-between max-w mx-auto h-20 bg-white px-5 relative z-20">
+    <header className="shadow-md ">
+      <nav className="flex items-center justify-between max-w mx-auto h-20 bg-white  px-5 relative z-20">
         <Logo />
         <div className="flex items-center gap-5">
-          <ul className="flex items-center gap-2">
+          <ul className="flex items-center gap-2 max-md:hidden">
             <li className="font-medium font-secondary text-sm">
               <NavLink to="/dashboard">Dashboard</NavLink>
             </li>

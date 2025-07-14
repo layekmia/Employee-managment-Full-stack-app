@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Dialog } from "@headlessui/react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { tasks } from "../../utils/helper";
 
 export default function EditTaskModal({ isOpen, onClose, taskData, onSubmit }) {
   const { register, handleSubmit, reset } = useForm();
@@ -57,10 +58,9 @@ export default function EditTaskModal({ isOpen, onClose, taskData, onSubmit }) {
                 {...register("task", { required: true })}
                 className="w-full border px-3 py-2 rounded focus:outline-none"
               >
-                <option value="Sales">Sales</option>
-                <option value="Support">Support</option>
-                <option value="Content">Content</option>
-                <option value="Paper-work">Paper-work</option>
+                {tasks.map((task) => (
+                  <option value={task}>{task}</option>
+                ))}
               </select>
             </div>
 

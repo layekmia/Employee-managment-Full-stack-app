@@ -18,12 +18,13 @@ import AdminEmployeeManagement from "../pages/AdminEmployeeManagement";
 import PrivateRoute from "../components/PrivateRoute";
 import DashboardPrivateRoute from "../components/Dashboard/PrivateRoute";
 import Unauthorized from "../pages/Unauthorized";
+import ContactUs from "../pages/ContactUs";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [{ index: true, element: <Home /> }],
+    children: [{ index: true, element: <Home /> }, {path: '/contact-us', element: <ContactUs/>}],
   },
   {
     path: "/dashboard",

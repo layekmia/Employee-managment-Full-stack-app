@@ -16,7 +16,6 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   const { user, signOutUser } = useAuth();
-  console.log(user);
 
   return (
     <header className="shadow-md ">

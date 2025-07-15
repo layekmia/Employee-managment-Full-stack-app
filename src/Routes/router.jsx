@@ -11,7 +11,6 @@ import PaymentHistory from "../pages/PaymentHistory";
 import EmployeeList from "../pages/EmployeeList";
 import Progress from "../pages/Progress";
 import Payroll from "../pages/Payroll";
-import Settings from "../pages/Settings";
 import SlugDetails from "../components/Dashboard/SlugDetails";
 import AdminEmployeeManagement from "../pages/AdminEmployeeManagement";
 import PrivateRoute from "../components/PrivateRoute";
@@ -19,6 +18,7 @@ import DashboardPrivateRoute from "../components/Dashboard/PrivateRoute";
 import Unauthorized from "../pages/Unauthorized";
 import ContactUs from "../pages/ContactUs";
 import DashboardHome from "../components/Dashboard/DashboardHome";
+import NotFound from "@/pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -95,7 +95,6 @@ const router = createBrowserRouter([
           </DashboardPrivateRoute>
         ),
       },
-      { path: "/dashboard/settings", element: <Settings /> },
     ],
   },
   {
@@ -121,6 +120,10 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/unauthorized", element: <Unauthorized /> },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);
 
 export default router;

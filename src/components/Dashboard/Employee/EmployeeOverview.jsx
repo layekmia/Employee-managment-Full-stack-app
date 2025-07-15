@@ -45,9 +45,6 @@ export default function EmployeeOverview() {
     month: `${payment.month} ${payment.year}`,
     salary: payment.salary,
   }));
-  console.log(chartData);
-
-  console.log(data);
 
   if (isLoading) return <Spinner />;
 

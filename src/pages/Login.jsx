@@ -22,7 +22,7 @@ export default function Login() {
     try {
       //   //  Check user existence in my backend
       const { data: userData } = await axios.get(
-        `http://localhost:3000/web/api/users/${data.email}`
+        `https://employee-management-server-ebon.vercel.app/web/api/users/${data.email}`
       );
       if (!userData) {
         toast.error("Account does not exist please enter valid credential");
@@ -41,7 +41,7 @@ export default function Login() {
       const token = await userCredential.user.getIdToken();
       //Send Firebase token to my backend to get JWT
       await axios.post(
-        "http://localhost:3000/web/api/auth",
+        "https://employee-management-server-ebon.vercel.app/web/api/auth",
         {},
         { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
       );

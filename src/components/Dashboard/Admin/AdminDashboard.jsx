@@ -3,6 +3,7 @@ import AdminStatsCards from "./AdminStatsCard";
 import { useQuery } from "@tanstack/react-query";
 import AdminRoleChart from "./AdminCahrt";
 import AdminUserGrowthChart from "./AdminUserGrowthChart";
+import Spinner from "../Spinner";
 
 export default function AdminDashboard() {
   const { data: stats, isLoading } = useQuery({
@@ -25,7 +26,7 @@ export default function AdminDashboard() {
   const months = userGrowth.map((item) => item.month);
   const userCounts = userGrowth.map((item) => item.count);
 
-  if (isLoading) return;
+  if (isLoading) return <Spinner />;
   return (
     <div>
       <AdminStatsCards stats={stats} isLoading={isLoading} />

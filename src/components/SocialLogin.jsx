@@ -17,7 +17,7 @@ export default function SocialLogin() {
 
       // 1️⃣ Check if the user already exists
       const res = await axios.get(
-        `http://localhost:3000/web/api/users/${user.email}/check-exist`
+        `https://employee-management-server-ebon.vercel.app/web/api/users/${user.email}/check-exist`
       );
 
       const userExists = res.data.exists;
@@ -37,14 +37,14 @@ export default function SocialLogin() {
         };
 
         await axios.post(
-          "http://localhost:3000/web/api/users/register",
+          "https://employee-management-server-ebon.vercel.app/web/api/users/register",
           userInfo
         );
       }
 
       // 3️⃣ Get JWT token from your backend
       await axios.post(
-        "http://localhost:3000/web/api/auth",
+        "https://employee-management-server-ebon.vercel.app/web/api/auth",
         {},
         { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
       );

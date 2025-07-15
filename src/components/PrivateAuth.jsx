@@ -3,5 +3,8 @@ import useAuth from "../hook/useAuth";
 
 export default function PrivateAuth({ children }) {
   const { user } = useAuth();
-  return user ? <Navigate to="/dashboard" /> : children;
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
+  return children;
 }

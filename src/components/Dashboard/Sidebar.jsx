@@ -64,19 +64,13 @@ const menu = [
     key: "payroll",
     role: ["admin"],
   },
-  {
-    path: "/dashboard/settings",
-    label: "Settings",
-    key: "settings",
-    role: ["admin", "hr", "employee"],
-  },
 ];
 
 export default function SidebarMenu({ userRole, setSidebarToggle }) {
   return (
     <nav className="flex flex-col mt-3">
       {menu
-        // .filter((item) => item.role.includes(userRole))
+        .filter((item) => item.role.includes(userRole))
         .map((item) => (
           <NavLink
             onClick={() => setSidebarToggle(false)}
@@ -90,7 +84,9 @@ export default function SidebarMenu({ userRole, setSidebarToggle }) {
               }`
             }
           >
-            <span className="text-base text-gray-500 dark:text-gray-200">{icons[item.key]}</span>
+            <span className="text-base text-gray-500 dark:text-gray-200">
+              {icons[item.key]}
+            </span>
             <span className="font-secondary text-[15.5px]">{item.label}</span>
           </NavLink>
         ))}

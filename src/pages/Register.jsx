@@ -61,14 +61,14 @@ export default function Register() {
       };
 
       await axios.post(
-        "http://localhost:3000/web/api/users/register",
+        "https://employee-management-server-ebon.vercel.app/web/api/users/register",
         userInfo
       );
 
       // send an api request for jwt token
       const token = await getIdToken(user);
       await axios.post(
-        "http://localhost:3000/web/api/auth",
+        "https://employee-management-server-ebon.vercel.app/web/api/auth",
         {},
         { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
       );
@@ -115,10 +115,8 @@ export default function Register() {
       const response = await axios.post(url, formData);
       const imageUrl = response.data.data.url;
       setValue("image", imageUrl);
-      console.log(imageUrl);
     } catch (error) {
       toast.error("Image upload failed", error.message);
-      console.log(error);
     } finally {
       setisImageUpload(false);
     }

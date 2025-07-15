@@ -46,39 +46,47 @@ export default function EditTaskModal({ isOpen, onClose, taskData, onSubmit }) {
     <Dialog open={isOpen} onClose={onClose} className="fixed inset-0 z-50">
       <div aria-hidden="true" />
       <div className="flex items-center bg-black/30 justify-center min-h-screen px-4">
-        <Dialog.Panel className="w-full max-w-md bg-white rounded p-6 space-y-4 shadow-lg">
-          <Dialog.Title className="text-xl font-semibold text-gray-800 font-secondary">
+        <Dialog.Panel className="w-full max-w-md bg-white dark:bg-gray-900 rounded p-6 space-y-4 shadow-lg">
+          <Dialog.Title className="text-xl font-semibold text-gray-800 dark:text-gray-100 font-secondary">
             Edit Task
           </Dialog.Title>
 
           <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Task</label>
+              <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                Task
+              </label>
               <select
                 {...register("task", { required: true })}
-                className="w-full border px-3 py-2 rounded focus:outline-none"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 px-3 py-2 rounded focus:outline-none"
               >
-                {tasks.map((task) => (
-                  <option value={task}>{task}</option>
+                {tasks.map((task, idx) => (
+                  <option key={idx} value={task}>
+                    {task}
+                  </option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Hours</label>
+              <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                Hours
+              </label>
               <input
                 type="number"
                 {...register("hours", { required: true })}
-                className="w-full border px-3 py-2 rounded focus:outline-none"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 px-3 py-2 rounded focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Date</label>
+              <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                Date
+              </label>
               <input
                 type="date"
                 {...register("date", { required: true })}
-                className="w-full border px-3 py-2 rounded focus:outline-none"
+                className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 px-3 py-2 rounded focus:outline-none"
               />
             </div>
 
@@ -86,14 +94,14 @@ export default function EditTaskModal({ isOpen, onClose, taskData, onSubmit }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
                 disabled={isUpdating}
+                className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50"
               >
                 {isUpdating ? "Updating..." : "Update"}
               </button>

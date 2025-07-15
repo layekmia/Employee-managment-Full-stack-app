@@ -18,7 +18,6 @@ export default function PayModal({ user, onClose, refetch }) {
       year: new Date().getFullYear(),
     },
   });
-  console.log(user);
 
   const [loading, setLoading] = useState(false);
 
@@ -53,24 +52,29 @@ export default function PayModal({ user, onClose, refetch }) {
   return (
     <Dialog open={true} onClose={onClose} className="fixed inset-0 z-50">
       <div className="flex items-center justify-center min-h-screen bg-black/50">
-        <Dialog.Panel className="bg-white p-6 rounded-lg w-full max-w-sm space-y-4">
-          <Dialog.Title className="text-xl font-bold">
+        <Dialog.Panel className="bg-white dark:bg-gray-900 p-6 rounded-lg w-full max-w-sm space-y-4 shadow-xl">
+          <Dialog.Title className="text-xl font-bold text-gray-800 dark:text-gray-100">
             Pay Employee
           </Dialog.Title>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-              <label className="text-sm">Amount</label>
+              <label className="text-sm text-gray-700 dark:text-gray-300">
+                Amount
+              </label>
               <input
                 {...register("amount", { required: true })}
                 type="number"
-                className="w-full border px-3 py-2 rounded focus:outline-none"
+                className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded focus:outline-none dark:bg-gray-800 dark:text-white"
                 disabled={true}
               />
             </div>
 
             <div>
-              <label htmlFor="month" className="text-sm block mb-1">
+              <label
+                htmlFor="month"
+                className="text-sm block mb-1 text-gray-700 dark:text-gray-300"
+              >
                 Month
               </label>
               <select
@@ -78,7 +82,7 @@ export default function PayModal({ user, onClose, refetch }) {
                   required: "Month is required",
                 })}
                 id="month"
-                className="w-full border px-3 py-2 rounded focus:outline-none"
+                className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded focus:outline-none dark:bg-gray-800 dark:text-white"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -96,11 +100,13 @@ export default function PayModal({ user, onClose, refetch }) {
             </div>
 
             <div>
-              <label className="text-sm">Year</label>
+              <label className="text-sm text-gray-700 dark:text-gray-300">
+                Year
+              </label>
               <input
-                {...register("year", { required: "year is Required" })}
+                {...register("year", { required: "Year is required" })}
                 type="number"
-                className="w-full border px-3 py-2 rounded focus:outline-none"
+                className="w-full border border-gray-300 dark:border-gray-600 px-3 py-2 rounded focus:outline-none dark:bg-gray-800 dark:text-white"
               />
               {errors.year && (
                 <p className="text-red-500 text-sm">{errors.year.message}</p>
@@ -111,7 +117,7 @@ export default function PayModal({ user, onClose, refetch }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 bg-gray-200 rounded"
+                className="px-4 py-2 bg-gray-200 dark:bg-gray-700 dark:text-gray-100 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
               >
                 Cancel
               </button>

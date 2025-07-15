@@ -18,8 +18,7 @@ import {
 } from "flowbite-react";
 import Spinner from "../components/Dashboard/Spinner";
 import { tasks } from "../utils/helper";
-
-
+import useTheme from "@/hook/useTheme";
 
 export default function WorkSheet() {
   const { register, handleSubmit, reset } = useForm();
@@ -28,6 +27,7 @@ export default function WorkSheet() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  const { darkMode } = useTheme();
 
   const selectedMonth = selectedDate.toLocaleString("default", {
     month: "long",
@@ -45,37 +45,40 @@ export default function WorkSheet() {
     },
   });
 
-const onSubmit = async (data) => {
-  const newEntry = {
-    employeeName: user.name,
-    task: data.task,
-    hours: Number(data.hours),
-    date: selectedDate.toISOString(),
-    month: selectedMonth,
-  };
+  const onSubmit = async (data) => {
+    const newEntry = {
+      employeeName: user.name,
+      task: data.task,
+      hours: Number(data.hours),
+      date: selectedDate.toISOString(),
+      month: selectedMonth,
+    };
 
-  try {
-    await axiosInstance.post("/employee-task", newEntry);
-    toast.success("Task added successfully!");
-    reset();
-    setSelectedDate(new Date());
-    
-    refetch();
-  } catch (error) {
-    console.error("Failed to submit task:", error);
-    toast.error(
-      error?.response?.data?.message || "Failed to add task. Try again."
-    );
-  }
-};
+    try {
+      await axiosInstance.post("/employee-task", newEntry);
+      toast.success("Task added successfully!");
+      reset();
+      setSelectedDate(new Date());
+
+      refetch();
+    } catch (error) {
+      console.error("Failed to submit task:", error);
+      toast.error(
+        error?.response?.data?.message || "Failed to add task. Try again."
+      );
+    }
+  };
 
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
-      title: "Ary you sure?",
+      title: "Are you sure?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Delete",
-      confirmButtonColor: "red",
+      confirmButtonColor: "#dc2626", // red-600
+      cancelButtonColor: "#6b7280", // gray-500
+      background: darkMode ? "#1f2937" : "#fff", // gray-800 for dark, white for light
+      color: darkMode ? "#f3f4f6" : "#111827", // gray-100 text for dark, gray-900 for light
     });
 
     if (confirm.isConfirmed) {

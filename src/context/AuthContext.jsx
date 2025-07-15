@@ -24,7 +24,6 @@ export default function AuthContextProvider({ children }) {
   };
 
   const signOutUser = async () => {
-    console.log("logout");
     await signOut(auth);
   };
 
@@ -43,10 +42,7 @@ export default function AuthContextProvider({ children }) {
           const res = await axiosInstance.get(`/user/${uid}`);
           const role = res.data.role;
           setUser({ name, email, image, uid, token,role });
-          console.log(res)
         } catch (error) {
-          console.log(error)
-          console.log(" Failed to fetch user role");
           setUser(null);
         }
       } else {

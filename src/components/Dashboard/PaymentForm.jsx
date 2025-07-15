@@ -83,7 +83,6 @@ export default function PaymentForm({ setIsOpen, selectedEmployee, refetch }) {
         }
       }
     } catch (err) {
-      console.log(err);
       setError("An unexpected error occurred: " + err.message);
     } finally {
       setLoading(false);

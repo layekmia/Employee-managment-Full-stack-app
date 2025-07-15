@@ -21,7 +21,6 @@ export default function AdminEmployeeManagement() {
   const [salaryUpdate, setSalaryUpdate] = useState({ id: null, value: "" });
   const [view, setView] = useState("table");
 
-  console.log(salaryUpdate);
 
   const { data: employees = [], isLoading } = useQuery({
     queryKey: ["allEmployees"],
@@ -163,6 +162,7 @@ export default function AdminEmployeeManagement() {
                         }
                       />
                       <button
+                        disabled={user.isFired}
                         onClick={() => {
                           if (salaryUpdate.value > user.salary) {
                             updateSalary(user._id, salaryUpdate.value);
@@ -170,7 +170,9 @@ export default function AdminEmployeeManagement() {
                             toast.error("Cannot decrease salary");
                           }
                         }}
-                        className="ml-2 px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        className={`${
+                          user.isFired && "opacity-40"
+                        } ml-2 px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700`}
                       >
                         Update
                       </button>
@@ -201,28 +203,30 @@ export default function AdminEmployeeManagement() {
           {employees.map((employee) => (
             <div
               key={employee._id}
-              className="bg-green-50 dark:bg-gray-800 p-5"
+              className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-5 shadow-sm transition"
             >
-              <div className="flex items-center gap-3 my-2">
+              {/* Employee Info */}
+              <div className="flex items-center gap-4 mb-4">
                 <img
-                  className="w-14 h-14 object-cover border-2 border-blue-600 rounded-full "
+                  className="w-14 h-14 object-cover border-2 border-blue-500 rounded-full"
                   src={employee.image}
-                  alt=""
+                  alt={employee.name}
                 />
                 <div>
-                  <h2 className="font-secondary text-xl font-medium leading-4 text-[#1F2937] dark:text-white">
+                  <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
                     {employee.name}
                   </h2>
-                  <p className="text-sm dark:text-gray-300 font-medium font-primary  text-[#6B7280]">
+                  <p className="text-sm text-gray-500 dark:text-gray-300 font-medium">
                     {employee.designation}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
+
+              <div className="flex items-center gap-3 mb-4">
                 <input
                   type="number"
-                  className="w-24 border px-2 py-1 rounded text-sm dark:bg-gray-900 dark:text-white dark:border-gray-500"
                   defaultValue={employee.salary}
+                  className="w-28 px-3 py-2 border rounded-md text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600"
                   onChange={(e) =>
                     setSalaryUpdate({
                       id: employee._id,
@@ -231,6 +235,7 @@ export default function AdminEmployeeManagement() {
                   }
                 />
                 <button
+                  disabled={employee.isFired}
                   onClick={() => {
                     if (salaryUpdate.value > employee.salary) {
                       updateSalary(employee._id, salaryUpdate.value);
@@ -238,37 +243,38 @@ export default function AdminEmployeeManagement() {
                       toast.error("Cannot decrease salary");
                     }
                   }}
-                  className="font-medium font-secondary text-xs py-1 px-2 bg-blue-600 rounded text-white"
+                  className={`${
+                    employee.isFired && "opacity-40"
+                  } ml-2 px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700`}
                 >
                   Update Salary
                 </button>
               </div>
-              <div className="flex items-center gap-3 flex-wrap mt-2">
-                <div>
-                  {employee.role !== "hr" && !employee.isFired && (
-                    <button
-                      onClick={() => makeHR(employee._id)}
-                      className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-                    >
-                      Make HR
-                    </button>
-                  )}
-                </div>
 
-                <div>
-                  {employee.isFired ? (
-                    <span className="text-red-500">Fired</span>
-                  ) : (
-                    <button
-                      onClick={() =>
-                        setFireModal({ isOpen: true, userId: employee._id })
-                      }
-                      className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                    >
-                      Fire
-                    </button>
-                  )}
-                </div>
+              <div className="flex items-center gap-3 flex-wrap">
+                {employee.role !== "hr" && !employee.isFired && (
+                  <button
+                    onClick={() => makeHR(employee._id)}
+                    className="text-sm px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md"
+                  >
+                    Make HR
+                  </button>
+                )}
+
+                {employee.isFired ? (
+                  <span className="text-red-500 font-medium text-sm">
+                    Fired
+                  </span>
+                ) : (
+                  <button
+                    onClick={() =>
+                      setFireModal({ isOpen: true, userId: employee._id })
+                    }
+                    className="text-sm px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md"
+                  >
+                    Fire
+                  </button>
+                )}
               </div>
             </div>
           ))}

@@ -6,7 +6,6 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import AuthLayout from "../Layout/AuthLayout";
 import PrivateAuth from "../components/PrivateAuth";
-import Overview from "../components/Dashboard/Overview";
 import WorkSheet from "../pages/WorkSheet";
 import PaymentHistory from "../pages/PaymentHistory";
 import EmployeeList from "../pages/EmployeeList";
@@ -19,12 +18,16 @@ import PrivateRoute from "../components/PrivateRoute";
 import DashboardPrivateRoute from "../components/Dashboard/PrivateRoute";
 import Unauthorized from "../pages/Unauthorized";
 import ContactUs from "../pages/ContactUs";
+import DashboardHome from "../components/Dashboard/DashboardHome";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [{ index: true, element: <Home /> }, {path: '/contact-us', element: <ContactUs/>}],
+    children: [
+      { index: true, element: <Home /> },
+      { path: "/contact-us", element: <ContactUs /> },
+    ],
   },
   {
     path: "/dashboard",
@@ -35,7 +38,7 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <Navigate to="/dashboard/overview" replace /> },
-      { path: "/dashboard/overview", element: <Overview /> },
+      { path: "/dashboard/overview", element: <DashboardHome /> },
       {
         path: "/dashboard/work-sheet",
         element: (

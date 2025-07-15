@@ -18,12 +18,15 @@
     "@tanstack/react-table": "^8.21.3",
     "aos": "^2.3.4",
     "axios": "^1.10.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "firebase": "^11.10.0",
     "flowbite": "^3.1.2",
     "flowbite-react": "^0.11.8",
     "framer-motion": "^12.23.0",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
+    "react-chartjs-2": "^5.3.0",
     "react-datepicker": "^8.4.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.60.0",
@@ -35,7 +38,9 @@
     "recharts": "^3.1.0",
     "shadcn": "^2.9.0",
     "sweetalert2": "^11.22.2",
-    "swiper": "^11.2.10"
+    "swiper": "^11.2.10",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

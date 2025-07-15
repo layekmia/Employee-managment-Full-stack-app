@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Dialog } from "@headlessui/react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { tasks } from "../../utils/helper";
+import { tasks } from "../../../utils/helper";
 
 export default function EditTaskModal({ isOpen, onClose, taskData, onSubmit }) {
   const { register, handleSubmit, reset } = useForm();

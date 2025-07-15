@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../hook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../utils/axiosInstance";
-import EditTaskModal from "../components/Dashboard/EmployeeTaskEdit";
+import EditTaskModal from "../components/Dashboard/Employee/EmployeeTaskEdit";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import {

@@ -166,34 +166,43 @@ export default function EmployeeOverview() {
         <h3 className="text-lg font-secondary  font-semibold mb-3 text-gray-800 dark:text-gray-100">
           Recent Payments
         </h3>
-        <Table className="w-full text-sm text-left">
-          <TableHead className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 uppercase">
-            <TableHeadCell className="px-3 py-2">Month</TableHeadCell>
-            <TableHeadCell className="px-3 py-2">Year</TableHeadCell>
-            <TableHeadCell className="px-3 py-2">Amount</TableHeadCell>
-            <TableHeadCell className="px-3 py-2">Status</TableHeadCell>
-            <TableHeadCell className="px-3 py-2">Date</TableHeadCell>
+        <Table className="w-full text-sm text-left rounded-lg overflow-hidden">
+          <TableHead className="bg-gradient-to-r from-blue-100 to-blue-200 dark:from-gray-800 dark:to-gray-700 text-blue-800 dark:text-blue-200 uppercase text-xs tracking-wider">
+            <TableHeadCell className="px-4 py-3">Month</TableHeadCell>
+            <TableHeadCell className="px-4 py-3">Year</TableHeadCell>
+            <TableHeadCell className="px-4 py-3">Amount</TableHeadCell>
+            <TableHeadCell className="px-4 py-3">Status</TableHeadCell>
+            <TableHeadCell className="px-4 py-3">Date</TableHeadCell>
           </TableHead>
 
           <TableBody>
             {data.recentPayments.map((item, idx) => (
               <TableRow
                 key={idx}
-                className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+                className="border-b border-gray-100 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors"
               >
-                <TableCell className="px-3 py-2 text-gray-800 dark:text-gray-200">
+                <TableCell className="px-4 py-3 text-gray-800 dark:text-gray-200 font-medium">
                   {item.month}
                 </TableCell>
-                <TableCell className="px-3 py-2 text-gray-800 dark:text-gray-200">
+                <TableCell className="px-4 py-3 text-gray-700 dark:text-gray-300">
                   {item.year}
                 </TableCell>
-                <TableCell className="px-3 py-2 text-green-600 dark:text-green-400">
+                <TableCell className="px-4 py-3 font-semibold text-green-600 dark:text-green-400">
                   ৳{item.salary}
                 </TableCell>
-                <TableCell className="px-3 py-2 text-gray-700 dark:text-gray-300">
-                  {item.paymentStatus}
+                <TableCell className="px-4 py-3">
+                  <span
+                    className={`inline-block px-2 py-1 rounded-full text-xs font-semibold
+              ${
+                item.paymentStatus === "Paid"
+                  ? "bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-200"
+                  : "bg-yellow-100 text-yellow-700 dark:bg-yellow-800 dark:text-yellow-200"
+              }`}
+                  >
+                    {item.paymentStatus}
+                  </span>
                 </TableCell>
-                <TableCell className="px-3 py-2 text-gray-700 dark:text-gray-300">
+                <TableCell className="px-4 py-3 text-gray-600 dark:text-gray-400">
                   {item.paymentDate?.slice(0, 10)}
                 </TableCell>
               </TableRow>

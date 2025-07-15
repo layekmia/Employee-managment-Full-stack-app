@@ -7,6 +7,8 @@ import useAuth from "@/hook/useAuth";
 import EmployeeOverview from "./Employee/EmployeeOverview";
 import HrDashboardCards from "./HR/HrOverview";
 import HrOverview from "./HR/HrOverview";
+import AdminDashboard from "./Admin/AdminDashboard";
+import Unauthorized from "@/pages/Unauthorized";
 
 export default function DashboardHome() {
   const { user } = useAuth();
@@ -17,11 +19,11 @@ export default function DashboardHome() {
   //   case "employee":
   //     return <EmployeeOverview />;
   //   case "hr":
-  //     return <HROverview />;
+  //     return <HrOverview />;
   //   case "admin":
-  //     return <AdminOverview />;
+  //     return <AdminDashboard />;
   //   default:
-  //     return <div>Unauthorized Access</div>;
+  //     return <Unauthorized/>;
   // }
-   return <HrOverview/>
+  return <EmployeeOverview/>
 }

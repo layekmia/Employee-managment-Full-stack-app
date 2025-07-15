@@ -8,7 +8,7 @@ import {
 import axiosInstance from "@/utils/axiosInstance";
 import useAuth from "@/hook/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 import {
   BarChart,
   Bar,

@@ -4,7 +4,9 @@
 // import useAuth from "@/hooks/useAuth"; // your auth hook
 
 import useAuth from "@/hook/useAuth";
-import EmployeeOverview from "./EmployeeOverview";
+import EmployeeOverview from "./Employee/EmployeeOverview";
+import HrDashboardCards from "./HR/HrOverview";
+import HrOverview from "./HR/HrOverview";
 
 export default function DashboardHome() {
   const { user } = useAuth();
@@ -21,5 +23,5 @@ export default function DashboardHome() {
   //   default:
   //     return <div>Unauthorized Access</div>;
   // }
-   return <EmployeeOverview/>
+   return <HrOverview/>
 }

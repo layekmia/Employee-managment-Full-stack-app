@@ -19,11 +19,11 @@ export default function NavBar() {
 
   return (
     <header className="shadow-md ">
-      <nav className="flex items-center justify-between max-w mx-auto h-20 bg-white  px-5 relative z-20">
-        <Logo />
+      <nav className="flex items-center justify-between max-w-7xl mx-auto h-20 bg-white  px-5 relative z-20">
+        <Logo color="dark:text-gray-800" />
         <div className="flex items-center gap-5">
-          <ul className="flex items-center gap-2 max-md:hidden">
-            <li className="font-medium font-secondary text-sm">
+          <ul className="flex items-center gap-2 max-md:hidden dark:text-gray-800">
+            <li className="font-medium font-secondary text-sm ">
               <NavLink to="/dashboard">Dashboard</NavLink>
             </li>
             <li className="font-medium font-secondary text-sm">
@@ -52,9 +52,6 @@ export default function NavBar() {
                 <DropdownItem>
                   <Link to="/dashboard">Dashboard</Link>
                 </DropdownItem>
-                <DropdownItem>
-                  <Link to="/dashboard/settings">Settings</Link>
-                </DropdownItem>
                 <DropdownDivider />
                 <DropdownItem onClick={signOutUser}>Sign out</DropdownItem>
               </Dropdown>
@@ -64,7 +61,7 @@ export default function NavBar() {
               <div className="items-center gap-1 font-primary font-semibold text-base hidden sm:flex">
                 <button
                   onClick={() => navigate("/auth/login")}
-                  className="py-[15px] px-[20px]"
+                  className="py-[15px] px-[20px] dark:text-gray-800"
                 >
                   Login
                 </button>

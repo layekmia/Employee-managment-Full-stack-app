@@ -68,10 +68,12 @@ export default function HrOverview() {
           <div className="overflow-x-auto">
             <Table className="min-w-[600px] w-full text-sm text-left shadow-md rounded-md overflow-hidden">
               <TableHead className="bg-gradient-to-r from-blue-100 via-blue-200 to-blue-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 text-gray-700 dark:text-gray-200 uppercase text-xs">
-                <TableHeadCell className="px-4 py-2">Employee</TableHeadCell>
-                <TableHeadCell className="px-4 py-2">Month</TableHeadCell>
-                <TableHeadCell className="px-4 py-2">Status</TableHeadCell>
-                <TableHeadCell className="px-4 py-2">Amount</TableHeadCell>
+                <TableRow>
+                  <TableHeadCell className="px-4 py-2">Employee</TableHeadCell>
+                  <TableHeadCell className="px-4 py-2">Month</TableHeadCell>
+                  <TableHeadCell className="px-4 py-2">Status</TableHeadCell>
+                  <TableHeadCell className="px-4 py-2">Amount</TableHeadCell>
+                </TableRow>
               </TableHead>
 
               <TableBody className="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-900">

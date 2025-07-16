@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { assets } from "../assets/assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useAuth from "../hook/useAuth";
@@ -61,18 +61,19 @@ export default function Register() {
       };
 
       await axios.post(
-        "https://employee-management-server-ebon.vercel.app/web/api/users/register",
+        "http://localhost:3000/web/api/users/register",
         userInfo
       );
 
       // send an api request for jwt token
       const token = await getIdToken(user);
       await axios.post(
-        "https://employee-management-server-ebon.vercel.app/web/api/auth",
+        "http://localhost:3000/web/api/auth",
         {},
         { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
       );
       toast.success("Register successfully");
+      window.location.reload();
     } catch (err) {
       if (auth.currentUser) {
         await auth.currentUser.delete();
@@ -123,16 +124,16 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-5 md:p-8">
+    <div className="flex flex-col dark:bg-gray-900 items-center justify-center p-5 md:p-8">
       <div className="pb-[35px]">
-        <h2 className="text-[#212529] text-[25px] text-center sm:text-3xl font-secondary mt-2 font-semibold">
+        <h2 className="text-[#212529] dark:text-white text-[25px] text-center sm:text-3xl font-secondary mt-2 font-semibold">
           Join WorkSync as an Employee or HR
         </h2>
       </div>
-      <div className="w-full max-w-md mx-auto p-5 sm:p-8 rounded border">
+      <div className="w-full max-w-md mx-auto p-5 sm:p-8 rounded border dark:bg-gray-700">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full  bg-white  space-y-4"
+          className="w-full  bg-white dark:bg-gray-700  space-y-4"
         >
           <label className="cursor-pointer">
             <img
@@ -145,7 +146,7 @@ export default function Register() {
           <input
             placeholder="Full Name"
             {...register("name", { required: true })}
-            className="w-full border px-4 py-2 rounded focus:outline-none"
+            className="w-full border px-4 py-2 rounded focus:outline-none dark:bg-gray-900"
           />
           {errors.name && (
             <p className="text-red-500 text-sm">Name is required</p>
@@ -155,34 +156,37 @@ export default function Register() {
             placeholder="Email Address"
             type="email"
             {...register("email", { required: true })}
-            className="w-full border px-4 py-2 rounded focus:outline-none"
+            className="w-full border px-4 py-2 rounded focus:outline-none dark:bg-gray-900"
           />
           {errors.email && (
             <p className="text-red-500 text-sm">Email is required</p>
           )}
 
-          <div className="relative">
-            <input
-              placeholder="Password"
-              type={showPassword ? "text" : "password"}
-              {...register("password", {
-                required: true,
-                minLength: 6,
-                validate: {
-                  hasUpper: (v) => /[A-Z]/.test(v) || "Must contain uppercase",
-                  hasSpecial: (v) =>
-                    /[!@#$%^&*(),.?":{}|<>]/.test(v) ||
-                    "Must contain special character",
-                },
-              })}
-              className="w-full border px-4 py-2 rounded focus:outline-none"
-            />
+          <div>
+            <div className="relative">
+              <input
+                placeholder="Password"
+                type={showPassword ? "text" : "password"}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  validate: {
+                    hasUpper: (v) =>
+                      /[A-Z]/.test(v) || "Must contain uppercase",
+                    hasSpecial: (v) =>
+                      /[!@#$%^&*(),.?":{}|<>]/.test(v) ||
+                      "Must contain special character",
+                  },
+                })}
+                className="w-full border px-4 py-2 rounded focus:outline-none dark:bg-gray-900"
+              />
 
-            {/* Toggle Button */}
-            <PasswordShowToggle
-              showPassword={showPassword}
-              setShowPassword={setShowPassword}
-            />
+              {/* Toggle Button */}
+              <PasswordShowToggle
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+              />
+            </div>
             {errors.password && (
               <p className="text-red-500 text-sm">
                 {errors.password.message || "Password invalid"}
@@ -195,7 +199,7 @@ export default function Register() {
             minLength={10}
             placeholder="Bank Account No"
             {...register("bank_account_no", { required: true })}
-            className="w-full border px-4 py-2 rounded focus:outline-none"
+            className="w-full border px-4 py-2 rounded focus:outline-none dark:bg-gray-900"
           />
           {errors.bank_account_no && (
             <p className="text-red-500 text-sm">Bank Account No is required</p>
@@ -205,7 +209,7 @@ export default function Register() {
             placeholder="Salary"
             type="number"
             {...register("salary", { required: true })}
-            className="w-full border px-4 py-2 rounded focus:outline-none"
+            className="w-full border px-4 py-2 rounded focus:outline-none dark:bg-gray-900"
           />
           {errors.salary && (
             <p className="text-red-500 text-sm">Salary is required</p>
@@ -214,7 +218,7 @@ export default function Register() {
           <input
             placeholder="Designation (e.g., Sales Assistant)"
             {...register("designation", { required: true })}
-            className="w-full border px-4 py-2 rounded focus:outline-none"
+            className="w-full border px-4 py-2 rounded focus:outline-none dark:bg-gray-900"
           />
           {errors.designation && (
             <p className="text-red-500 text-sm">Designation is required</p>
@@ -222,7 +226,7 @@ export default function Register() {
 
           <select
             {...register("role", { required: true })}
-            className="w-full border px-4 py-2 rounded focus:outline-none"
+            className="w-full border px-4 py-2 rounded focus:outline-none dark:bg-gray-900"
             defaultValue=""
           >
             <option value="" disabled>

@@ -72,15 +72,17 @@ export default function EmployeeList() {
       <div className="overflow-x-auto ">
         <Table striped className="min-w-[1000px] w-full">
           <TableHead>
-            <TableHeadCell className="bg-[#266dfb10]">Name</TableHeadCell>
-            <TableHeadCell className="bg-[#266dfb10]">Email</TableHeadCell>
-            <TableHeadCell className="bg-[#266dfb10]">Verified</TableHeadCell>
-            <TableHeadCell className="bg-[#266dfb10]">
-              Bank Account
-            </TableHeadCell>
-            <TableHeadCell className="bg-[#266dfb10]">Salary</TableHeadCell>
-            <TableHeadCell className="bg-[#266dfb10]">Payment</TableHeadCell>
-            <TableHeadCell className="bg-[#266dfb10]">Details</TableHeadCell>
+            <TableRow>
+              <TableHeadCell className="bg-[#266dfb10]">Name</TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">Email</TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">Verified</TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">
+                Bank Account
+              </TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">Salary</TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">Payment</TableHeadCell>
+              <TableHeadCell className="bg-[#266dfb10]">Details</TableHeadCell>
+            </TableRow>
           </TableHead>
           <TableBody className="divide-y">
             {employees.map((employee, index) => {

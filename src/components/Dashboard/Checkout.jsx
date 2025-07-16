@@ -7,7 +7,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 export default function Checkout({ setIsOpen, selectedEmployee, refetch }) {
   return (
     <Elements stripe={stripePromise}>
-      <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-50">
+      <div className="fixed inset-0  flex items-center justify-center bg-black/20 z-50">
         <PaymentForm
           setIsOpen={setIsOpen}
           selectedEmployee={selectedEmployee}

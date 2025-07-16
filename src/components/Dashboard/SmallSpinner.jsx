@@ -2,7 +2,7 @@ export default function SmallSpinner() {
   return (
     <div className="flex justify-center items-center py-6">
       <svg
-        className="animate-spin h-7 w-7 text-blue-500"  // ← Increased size from h-5 w-5 to h-8 w-8
+        className="animate-spin h-7 w-7 text-blue-500" 
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

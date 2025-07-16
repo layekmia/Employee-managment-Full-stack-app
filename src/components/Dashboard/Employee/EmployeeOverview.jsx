@@ -165,11 +165,13 @@ export default function EmployeeOverview() {
         </h3>
         <Table className="w-full text-sm text-left rounded-lg overflow-hidden">
           <TableHead className="bg-gradient-to-r from-blue-100 to-blue-200 dark:from-gray-800 dark:to-gray-700 text-blue-800 dark:text-blue-200 uppercase text-xs tracking-wider">
-            <TableHeadCell className="px-4 py-3">Month</TableHeadCell>
-            <TableHeadCell className="px-4 py-3">Year</TableHeadCell>
-            <TableHeadCell className="px-4 py-3">Amount</TableHeadCell>
-            <TableHeadCell className="px-4 py-3">Status</TableHeadCell>
-            <TableHeadCell className="px-4 py-3">Date</TableHeadCell>
+            <TableRow>
+              <TableHeadCell className="px-4 py-3">Month</TableHeadCell>
+              <TableHeadCell className="px-4 py-3">Year</TableHeadCell>
+              <TableHeadCell className="px-4 py-3">Amount</TableHeadCell>
+              <TableHeadCell className="px-4 py-3">Status</TableHeadCell>
+              <TableHeadCell className="px-4 py-3">Date</TableHeadCell>
+            </TableRow>
           </TableHead>
 
           <TableBody>

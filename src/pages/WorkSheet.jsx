@@ -75,10 +75,10 @@ export default function WorkSheet() {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Delete",
-      confirmButtonColor: "#dc2626", // red-600
-      cancelButtonColor: "#6b7280", // gray-500
-      background: darkMode ? "#1f2937" : "#fff", // gray-800 for dark, white for light
-      color: darkMode ? "#f3f4f6" : "#111827", // gray-100 text for dark, gray-900 for light
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#6b7280",
+      background: darkMode ? "#1f2937" : "#fff",
+      color: darkMode ? "#f3f4f6" : "#111827",
     });
 
     if (confirm.isConfirmed) {
@@ -151,16 +151,20 @@ export default function WorkSheet() {
         <div className="overflow-x-scroll">
           <Table striped className="min-w-[500px]">
             <TableHead>
-              <TableHeadCell className="bg-[#266dfb10]">Task</TableHeadCell>
-              <TableHeadCell className="bg-[#266dfb10]">Hours</TableHeadCell>
-              <TableHeadCell className="bg-[#266dfb10]">Date</TableHeadCell>
-              <TableHeadCell className="bg-[#266dfb10]">Actions</TableHeadCell>
+              <TableRow>
+                <TableHeadCell className="bg-[#266dfb10]">Task</TableHeadCell>
+                <TableHeadCell className="bg-[#266dfb10]">Hours</TableHeadCell>
+                <TableHeadCell className="bg-[#266dfb10]">Date</TableHeadCell>
+                <TableHeadCell className="bg-[#266dfb10]">
+                  Actions
+                </TableHeadCell>
+              </TableRow>
             </TableHead>
             <TableBody className="divide-y">
               {workData.length === 0 ? (
                 <TableRow>
                   <TableCell
-                    colSpan={4} // assuming your table has 4 columns
+                    colSpan={4}
                     className="text-center py-4 font-medium text-gray-600 font-secondary"
                   >
                     You haven't added any tasks yet.

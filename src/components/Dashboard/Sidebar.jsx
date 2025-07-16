@@ -1,12 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { FaTachometerAlt, FaUsers, FaMoneyCheck, FaCog } from "react-icons/fa";
+import {  FaUsers, FaMoneyCheck, FaCog } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
-import { BsCardChecklist } from "react-icons/bs";
 import { GiProgression } from "react-icons/gi";
 import { AiOutlineFileText } from "react-icons/ai";
-import { TbReportMoney } from "react-icons/tb";
 import { FaMoneyCheckAlt } from "react-icons/fa";
-import { MdOutlineAttachMoney } from "react-icons/md";
 
 // Example icon mapping (you can improve it)
 const icons = {

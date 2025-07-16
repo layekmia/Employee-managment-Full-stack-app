@@ -4,17 +4,16 @@ import AOS from "aos";
 import { useEffect } from "react";
 
 export default function Features() {
-
-      useEffect(() => {
-        AOS.init({ duration: 1000, once: true });
-      }, []);
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
 
   return (
     <div className="py-10">
       {hrSolutions.map((item, idx) => (
         <section
           key={item.id}
-          data-aos='fade-up'
+          data-aos="fade-up"
           data-aos-delay={idx * 200}
           className={`py-10 ${idx % 2 === 1 ? "bg-gray-50" : "bg-white"}`}
         >

@@ -1,6 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useAuth from "../../hook/useAuth";
 import axiosInstance from "../../utils/axiosInstance";
 import { toast } from "react-toastify";
@@ -10,7 +9,6 @@ export default function PaymentForm({ setIsOpen, selectedEmployee, refetch }) {
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
   const { user } = useAuth();
 
   const handleSubmit = async (e) => {

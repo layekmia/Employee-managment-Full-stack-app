@@ -8,7 +8,7 @@ import Spinner from "../Dashboard/Spinner";
 export default function DashboardHome() {
   const { user } = useAuth();
 
-  if (!user) return <Spinner/>;
+  if (!user) return <Spinner />;
 
   switch (user.role) {
     case "employee":

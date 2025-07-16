@@ -30,8 +30,8 @@ function renderStars(rating) {
 export default function TestimonialSlider() {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // animation duration
-      once: true, // only animate once
+      duration: 1000,
+      once: true,
     });
   }, []);
 

@@ -4,12 +4,12 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <>
+    <div className="bg-white">
       <NavBar />
       <main className="min-h-screen">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

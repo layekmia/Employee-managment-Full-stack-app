@@ -5,17 +5,13 @@ import {
   DropdownItem,
 } from "flowbite-react";
 import SidebarMenu from "../components/Dashboard/Sidebar";
-import { IoMdNotifications } from "react-icons/io";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../components/Logo";
 import { dashboardRouteTitles } from "../utils/helper";
 import { useState } from "react";
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
 import { RxCross1 } from "react-icons/rx";
 import useAuth from "../hook/useAuth";
 import useTheme from "../hook/useTheme";
-import { FaMoon } from "react-icons/fa";
-import { IoSunnySharp } from "react-icons/io5";
 import { assets } from "../assets/assets";
 
 export default function DashboardLayout() {
@@ -23,6 +19,7 @@ export default function DashboardLayout() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const title = dashboardRouteTitles[location.pathname] || "Dashboard";
   const navigate = useNavigate();
+
 
   const { user, signOutUser } = useAuth();
   const { darkMode, setDarkMode } = useTheme();
@@ -68,21 +65,10 @@ export default function DashboardLayout() {
             </h2>
           </div>
           <div className="flex items-center gap-1">
-            <span className="text-2xl dark:text-gray-300 text-gray-500 cursor-pointer">
-              <IoMdNotifications />
+            <span className="text-gray-500  dark:text-gray-300 mr-2 font-secondary text-sm capitalize">
+              ({user.role})
             </span>
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className={`w-10 h-10 flex items-center justify-center rounded-md  text-gray-500 ${
-                darkMode ? "hover:bg-[#374151]" : "hover:bg-[#f2f2f2]"
-              } transition-all duration-300`}
-            >
-              {darkMode ? (
-                <IoSunnySharp className="text-base" />
-              ) : (
-                <FaMoon className="text-base" />
-              )}
-            </button>
+
             <Dropdown
               label=""
               dismissOnClick={false}
@@ -103,9 +89,21 @@ export default function DashboardLayout() {
               <DropdownItem>
                 <Link to="/dashboard">Dashboard</Link>
               </DropdownItem>
-              <DropdownItem>
-                <Link to="/dashboard/settings">Settings</Link>
-              </DropdownItem>
+              <DropdownHeader>
+                <label class="inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    value=""
+                    class="sr-only peer"
+                    checked={darkMode}
+                    onChange={() => setDarkMode(!darkMode)}
+                  />
+                  <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Theme
+                  </span>
+                </label>
+              </DropdownHeader>
               <DropdownDivider />
               <DropdownItem onClick={signOutUser}>Sign out</DropdownItem>
             </Dropdown>

@@ -16,7 +16,7 @@ export default function SocialLogin() {
       const bankAccount = generateRandomBankAccount();
 
       const res = await axios.get(
-        `http://localhost:3000/web/api/users/${user.email}/check-exist`
+        `https://employee-management-server-ebon.vercel.app/web/api/users/${user.email}/check-exist`
       );
 
       const userExists = res.data.exists;
@@ -36,13 +36,13 @@ export default function SocialLogin() {
         };
 
         await axios.post(
-          "http://localhost:3000/web/api/users/register",
+          "https://employee-management-server-ebon.vercel.app/web/api/users/register",
           userInfo
         );
       }
 
       await axios.post(
-        "http://localhost:3000/web/api/auth",
+        "https://employee-management-server-ebon.vercel.app/web/api/auth",
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

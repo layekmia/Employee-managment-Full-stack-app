@@ -7,7 +7,7 @@ A modern full-stack role-based employee management system built with React, Fire
 ## 🌐 Live Preview
 
 🔗 [Live Site](https://worksyncemployee.netlify.app/)  
-📂 [Backend Repository](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-layekmia.git)
+📂 [Backend Repository](https://github.com/layekmia/Employee-managment-server?tab=readme-ov-file)
 
 ---
 

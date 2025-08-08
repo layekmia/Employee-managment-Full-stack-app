@@ -99,7 +99,6 @@ A modern full-stack role-based employee management system built with React, Fire
 - Monthly User Growth Line Chart (Admin only)  
 - Salary vs Month Bar Chart (HR view)  
 - Real-time progress filtering and toggled grid/table views
-
 ---
 
 ## 🧪 Getting Started
